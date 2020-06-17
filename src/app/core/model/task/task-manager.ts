@@ -1,39 +1,26 @@
 import { Task } from "./task";
 
 export class TaskManager {
-  tasks: Task[] = [];
+  private tasks: Set<Task> = new Set<Task>();
 
   run(onStartupOnly: boolean = false) {}
 
-  add(task: Task): boolean {
-    if (task != null) {
-      if (this.findIndex(task) === -1) {
-        this.tasks.push(task);
-        return true;
-      }
+  add(task: Task) {
+    if (task == null) {
+      return;
     }
-    return false;
+    this.tasks.add(task);
   }
 
-  remove(task: Task): Task {
-    if (task != null) {
-      const i: number = this.findIndex(task);
-      if (i !== -1) {
-        return this.tasks.splice(i, 1)[0];
-      }
+  remove(task: Task): boolean {
+    if (task == null) {
+      return false;
     }
-    return undefined;
+    return this.tasks.delete(task);
   }
 
-  findIndex(task: Task): number {
-    if (task != null) {
-      for (let i = 0; i < this.tasks.length; i++) {
-        const t: Task = this.tasks[i];
-        if (t.constructor === task.constructor && t.name === task.name) {
-          return i;
-        }
-      }
-    }
-    return -1;
+  size(): number {
+    return this.tasks.size;
   }
+
 }

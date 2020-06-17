@@ -11,26 +11,26 @@ describe('Task Manager', () => {
     const moveTask: Task = new MoveTask();
     const deleteTask: Task = new DeleteTask();
 
-    expect(taskManager.tasks.length).toBe(0);
+    expect(taskManager.size()).toBe(0);
 
     taskManager.add(moveTask);
-    expect(taskManager.tasks.length).toBe(1);
+    expect(taskManager.size()).toBe(1);
 
     taskManager.add(deleteTask);
-    expect(taskManager.tasks.length).toBe(2);
+    expect(taskManager.size()).toBe(2);
 
-    expect(taskManager.add(undefined)).toBe(false);
-    expect(taskManager.add(null)).toBe(false);
-    expect(taskManager.tasks.length).toBe(2);
+    taskManager.add(undefined);
+    expect(taskManager.size()).toBe(2);
 
-    expect(taskManager.add(deleteTask)).toBe(false);
-    expect(taskManager.add(deleteTask)).toBe(false);
-    expect(taskManager.add(moveTask)).toBe(false);
-    expect(taskManager.add(deleteTask)).toBe(false);
-    expect(taskManager.add(moveTask)).toBe(false);
-    expect(taskManager.add(moveTask)).toBe(false);
+    taskManager.add(deleteTask);
+    taskManager.add(deleteTask);
+    taskManager.add(deleteTask);
+    taskManager.add(moveTask);
+    taskManager.add(deleteTask);
+    taskManager.add(moveTask);
+    taskManager.add(moveTask);
 
-    expect(taskManager.tasks.length).toBe(2);
+    expect(taskManager.size()).toBe(2);
   });
 
   it('#remove should task correctly', () => {
@@ -42,41 +42,23 @@ describe('Task Manager', () => {
 
 
     // invalid remove
-    expect(taskManager.remove(undefined)).toBe(undefined);
-    expect(taskManager.remove(null)).toBe(undefined);
+    expect(taskManager.remove(undefined)).toBe(false);
 
     // valid remove
-    expect(taskManager.remove(moveTask)).toBe(moveTask);
-    expect(taskManager.tasks.length).toBe(1);
+    expect(taskManager.remove(moveTask)).toBe(true);
+    expect(taskManager.size()).toBe(1);
 
     // invalid remove
-    expect(taskManager.remove(moveTask)).toBe(undefined);
-    expect(taskManager.tasks.length).toBe(1);
+    expect(taskManager.remove(moveTask)).toBe(false);
+    expect(taskManager.size()).toBe(1);
 
     // valid remove
-    expect(taskManager.remove(deleteTask)).toBe(deleteTask);
-    expect(taskManager.tasks.length).toBe(0);
+    expect(taskManager.remove(deleteTask)).toBe(true);
+    expect(taskManager.size()).toBe(0);
 
     // invalid remove
-    expect(taskManager.remove(deleteTask)).toBe(undefined);
-    expect(taskManager.tasks.length).toBe(0);
-  });
-
-  it('#findIndex should return -1 with undefined', () => {
-    expect(taskManager.findIndex(undefined)).toBe(-1);
-  });
-
-  it('#findIndex should return -1 with null', () => {
-    expect(taskManager.findIndex(null)).toBe(-1);
-  });
-
-  it('#findIndex should return correct index', () => {
-    const moveTask: Task = new MoveTask();
-    const deleteTask: Task = new DeleteTask();
-    taskManager.add(moveTask);
-    taskManager.add(deleteTask);
-    expect(taskManager.findIndex(deleteTask)).toBe(1);
-    expect(taskManager.findIndex(moveTask)).toBe(0);
+    expect(taskManager.remove(deleteTask)).toBe(false);
+    expect(taskManager.size()).toBe(0);
   });
 
 });
