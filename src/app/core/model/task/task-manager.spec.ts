@@ -143,4 +143,29 @@ describe('Task Manager', () => {
     expect(taskManager.size()).toBe(0);
   });
 
+  it('#findIndex should not find an index with undefined', () => {
+    expect(taskManager.findIndex(undefined)).toBe(-1);
+  });
+
+  it('#findIndex should not find an index with null', () => {
+    expect(taskManager.findIndex(null)).toBe(-1);
+  });
+
+  it('#findIndex should not find index of different instance with same name', () => {
+    const moveTask: Task = new MoveTask('A');
+    const deleteTask: Task = new DeleteTask('A');
+
+    taskManager.add(moveTask);
+    expect(taskManager.findIndex(deleteTask)).toBe(-1);
+  });
+
+  it('#findIndex should find index of task in set with duplicate names different instances', () => {
+    const moveTask: Task = new MoveTask('A');
+    const deleteTask: Task = new DeleteTask('A');
+
+    taskManager.add(moveTask);
+    taskManager.add(deleteTask);
+    expect(taskManager.findIndex(deleteTask)).toBe(1);
+  });
+
 });
