@@ -8,8 +8,8 @@ describe('Task Manager', () => {
   beforeEach(() => { taskManager = new TaskManager(); });
 
   it('#add should add only unique tasks', () => {
-    const moveTask: Task = new MoveTask();
-    const deleteTask: Task = new DeleteTask();
+    const moveTask: Task = new MoveTask('A');
+    const deleteTask: Task = new DeleteTask('A');
 
     expect(taskManager.size()).toBe(0);
 
@@ -31,32 +31,114 @@ describe('Task Manager', () => {
     taskManager.add(moveTask);
 
     expect(taskManager.size()).toBe(2);
+
+    // duplicate should not be added
+    const moveTask2: Task = new MoveTask('A');
+    taskManager.add(moveTask2);
+    taskManager.add(moveTask2);
+    taskManager.add(moveTask2);
+    expect(taskManager.size()).toBe(2);
   });
 
-  it('#remove should task correctly', () => {
-    const moveTask: Task = new MoveTask();
-    const deleteTask: Task = new DeleteTask();
+  it('#add should not add duplicate by name, same reference', () => {
+    const name: string = 'A';
+    const moveTask1: Task = new MoveTask(name);
+    // duplicate should not be added
+    taskManager.add(moveTask1);
+    taskManager.add(moveTask1);
+    expect(taskManager.size()).toBe(1);
+  });
+
+  it('#add should not add duplicate by name, different reference', () => {
+    const name: string = 'A';
+    const moveTask1: Task = new MoveTask(name);
+    // duplicate should not be added
+    const moveTask2: Task = new MoveTask(name);
+    taskManager.add(moveTask1);
+    taskManager.add(moveTask2);
+    taskManager.add(moveTask1);
+    taskManager.add(moveTask2);
+    expect(taskManager.size()).toBe(1);
+  });
+
+  it('#add should add same name different instances', () => {
+    const name: string = 'A';
+    const moveTask: Task = new MoveTask(name);
+    const deleteTask: Task = new DeleteTask(name);
+    taskManager.add(moveTask);
+    taskManager.add(deleteTask);
+    expect(taskManager.size()).toBe(2);
+  });
+
+  it('#add should add same name different instances but not duplicate add', () => {
+    const name: string = 'A';
+    const moveTask: Task = new MoveTask(name);
+    const deleteTask: Task = new DeleteTask(name);
+    taskManager.add(moveTask);
+    taskManager.add(moveTask);
+    taskManager.add(moveTask);
+    taskManager.add(deleteTask);
+    taskManager.add(deleteTask);
+    taskManager.add(deleteTask);
+    expect(taskManager.size()).toBe(2);
+  });
+
+  it('#remove should not be true for removing undefined', () => {
+    const moveTask: Task = new MoveTask('A');
+    const deleteTask: Task = new DeleteTask('A');
 
     taskManager.add(moveTask);
     taskManager.add(deleteTask);
 
-
     // invalid remove
     expect(taskManager.remove(undefined)).toBe(false);
+    expect(taskManager.size()).toBe(2);
+  });
 
-    // valid remove
+  it('#remove should not be true for removing null', () => {
+    const moveTask: Task = new MoveTask('A');
+    const deleteTask: Task = new DeleteTask('A');
+
+    taskManager.add(moveTask);
+    taskManager.add(deleteTask);
+
+    // invalid remove
+    expect(taskManager.remove(null)).toBe(false);
+    expect(taskManager.size()).toBe(2);
+  });
+
+  it('#remove should remove task', () => {
+    const moveTask: Task = new MoveTask('A');
+    const deleteTask: Task = new DeleteTask('A');
+
+    taskManager.add(moveTask);
+    taskManager.add(deleteTask);
+
     expect(taskManager.remove(moveTask)).toBe(true);
     expect(taskManager.size()).toBe(1);
 
-    // invalid remove
-    expect(taskManager.remove(moveTask)).toBe(false);
-    expect(taskManager.size()).toBe(1);
+    expect(taskManager.contains(moveTask)).toBe(false);
+    expect(taskManager.contains(deleteTask)).toBe(true);
 
-    // valid remove
     expect(taskManager.remove(deleteTask)).toBe(true);
     expect(taskManager.size()).toBe(0);
 
-    // invalid remove
+  });
+
+  it('#remove should not remove duplicate task', () => {
+    const moveTask: Task = new MoveTask('A');
+    const deleteTask: Task = new DeleteTask('A');
+
+    taskManager.add(moveTask);
+    taskManager.add(deleteTask);
+
+    expect(taskManager.remove(moveTask)).toBe(true);
+    expect(taskManager.size()).toBe(1);
+    expect(taskManager.remove(moveTask)).toBe(false);
+    expect(taskManager.size()).toBe(1);
+
+    expect(taskManager.remove(deleteTask)).toBe(true);
+    expect(taskManager.size()).toBe(0);
     expect(taskManager.remove(deleteTask)).toBe(false);
     expect(taskManager.size()).toBe(0);
   });

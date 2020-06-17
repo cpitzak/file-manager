@@ -1,6 +1,9 @@
 import { Task } from "./task";
 
 export class MoveTask extends Task {
-	run() {
+  constructor(name: string) {
+    super(name);
   }
+
+  run() {}
 }
