@@ -15,6 +15,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { HomeModule } from './home/home.module';
+import { OpenFolderModule } from './open-folder/open-folder.module';
+import { SideMenuModule } from './side-menu/side-menu.module';
 import { DetailModule } from './detail/detail.module';
 
 import { AppComponent } from './app.component';
@@ -34,6 +36,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     SharedModule,
     HomeModule,
     DetailModule,
+    OpenFolderModule,
+    SideMenuModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
