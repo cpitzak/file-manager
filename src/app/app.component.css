@@ -1,5 +1,7 @@
 .container {
   overflow: hidden;
+  /* background-color: white; */
+  background-color: #F4F6F6;
 }
 .row {
   display: flex;
@@ -21,4 +23,6 @@
   flex: 1;
   min-width: 200px;
   background-color: #F4F6F6;
+  /* background-color: white; */
+  margin-left: 25px;
 }
