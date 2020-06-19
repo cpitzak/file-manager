@@ -9,10 +9,10 @@
         "BACK_TO_HOME": "Back to Home"
     },
     "SIDE_MENU": {
-      "MOVE": "Move",
-      "DELETE": "Delete",
-      "SAVED": "Saved",
-      "LOG": "Log"
+      "MOVE": "Move Files",
+      "DELETE": "Delete Files",
+      "SAVED": "Saved Tasks",
+      "LOG": "Task Logs"
     }
   }
 }
