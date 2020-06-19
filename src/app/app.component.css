@@ -11,8 +11,6 @@
 
 .side-menu {
   display: flex;
-  /* flex-direction: column; */
-  /* min-width: 250px; */
   background-color: #EAEAEA;
 }
 

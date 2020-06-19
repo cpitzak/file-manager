@@ -1,40 +1,24 @@
 .container {
   display: flex;
   justify-content: left;
-  /* margin: 15px; */
   margin-top: 5px;
-  margin-left: 15px;
 }
-
 #navbar {
-  /* font-size: 35px; */
   list-style-type: none;
   margin: 0;
   padding: 0;
   min-width: 250px;
-  /* background-color: #EEEEEE; */
 }
-
 ul#navbar li a {
-  display: block;
   color: black;
-  padding: 8px 16px;
   text-decoration: none;
 }
-
-
-ul#navbar li a:hover {
-  background-color: grey;
-  color: white;
-}
-
 .row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
 }
-
 .column {
   display: flex;
   flex-direction: column;
@@ -42,8 +26,21 @@ ul#navbar li a:hover {
   flex-basis: 100%;
   flex: 1;
 }
-
 .nav-item {
   display: flex;
+  padding: 8px 15px;
   align-items: stretch;
+  outline: none;
+}
+.nav-item:hover {
+  cursor: pointer;
+  background-color: #DDDDDD;
+}
+.icon {
+  margin-right: 15px;
+  width: 20px;
+}
+
+.active {
+  background-color: #d3d3d3 !important;
 }
