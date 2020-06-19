@@ -15,12 +15,16 @@ export class MoveComponent implements OnInit {
       taskName: 'Organize Desktop'
     }
   ];
+  showClose: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
   }
 
   onDuplicateTab(tab: Tab) {
+    if (tab == null) {
+      return;
+    }
     const existing: string[] = this.tabs.reduce(function(a, c) {
       return a.concat(c.taskName);
     }, []);
@@ -29,6 +33,13 @@ export class MoveComponent implements OnInit {
       taskName
     }
     this.tabs.push(newTab);
+  }
+
+  onRemoveTab(index: number) {
+    if (index == null && index > 0 && index < this.tabs.length) {
+      return;
+    }
+    this.tabs.splice(index, 1);
   }
 
 }
