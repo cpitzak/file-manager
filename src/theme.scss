@@ -7,7 +7,7 @@ $custom-typography: mat-typography-config(
 
 
 $app-primary: mat-palette($mat-grey);
-$app-accent: mat-palette($mat-blue, A200, A100, A400);
+$app-accent: mat-palette($mat-grey, A200, A100, A400);
 
 $app-warn: mat-palette($mat-red);
 

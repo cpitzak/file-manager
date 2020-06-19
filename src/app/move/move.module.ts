@@ -5,6 +5,7 @@ import { MatTabsModule } from "@angular/material/tabs";
 
 import { MoveRoutingModule } from "./move-routing.module";
 import { SharedModule } from "../shared/shared.module";
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [MoveComponent],
@@ -12,7 +13,8 @@ import { SharedModule } from "../shared/shared.module";
     CommonModule,
     SharedModule,
     MoveRoutingModule,
-    MatTabsModule
+    MatTabsModule,
+    MatButtonModule
   ],
 })
 export class MoveModule {}

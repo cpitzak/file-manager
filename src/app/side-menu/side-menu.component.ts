@@ -13,7 +13,4 @@ export class SideMenuComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  isActive(url) {
-  }
-
 }
