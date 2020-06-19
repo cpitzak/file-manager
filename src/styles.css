@@ -19,3 +19,15 @@ html, body {
   background-size: cover; /* version standardisée */
 
 }
+
+.window-controls-container {
+  color: #ADADAD !important;
+}
+
+.action-menu-item {
+  color: #ADADAD !important;
+}
+
+.titlebar, .titlebar > * {
+  color: #ADADAD;
+}

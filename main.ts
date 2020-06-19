@@ -19,9 +19,11 @@ function createWindow(): BrowserWindow {
     height: 714, // size.height,
     minWidth: 800,
     minHeight: 600,
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
+      preload: path.join(__dirname, 'preload.js')
     },
   });
   win.setMenuBarVisibility(false);
