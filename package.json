@@ -64,7 +64,6 @@
     "@types/node": "12.11.1",
     "@typescript-eslint/eslint-plugin": "2.27.0",
     "@typescript-eslint/parser": "2.27.0",
-    "custom-electron-titlebar": "3.2.2-hotfix62",
     "chai": "4.2.0",
     "codelyzer": "5.2.2",
     "conventional-changelog-cli": "2.0.32",
@@ -97,5 +96,7 @@
   "engines": {
     "node": ">=10.13.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "custom-electron-titlebar": "3.2.2-hotfix62"
+  }
 }
