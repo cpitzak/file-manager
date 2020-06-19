@@ -1,9 +1,16 @@
 <div class="container">
   <ul id="navbar">
-    <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/detail">Details</a></li>
-    <li><a routerLink="/detail">Interview QnA</a></li>
-    <li><a routerLink="/detail">Tutorials</a></li>
-    <li><a routerLink="/detail">Testimonials</a></li>
-</ul>
+    <li>
+      <a routerLink="/">{{ 'PAGES.SIDE_MENU.MOVE' | translate }}</a>
+    </li>
+    <li>
+      <a routerLink="/detail">{{ 'PAGES.SIDE_MENU.DELETE' | translate }}</a>
+    </li>
+    <li>
+      <a routerLink="/detail">{{ 'PAGES.SIDE_MENU.SAVED' | translate }}</a>
+    </li>
+    <li>
+      <a routerLink="/detail">{{ 'PAGES.SIDE_MENU.LOG' | translate }}</a>
+    </li>
+  </ul>
 </div>
