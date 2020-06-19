@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -16,6 +17,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { OpenFolderModule } from './open-folder/open-folder.module';
 import { SideMenuModule } from './side-menu/side-menu.module';
+import { MoveModule } from './move/move.module';
 import { DeleteModule } from './delete/delete.module';
 import { LogsModule } from './logs/logs.module';
 import { SavedModule } from './saved/saved.module';
@@ -30,11 +32,13 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
     CoreModule,
     SharedModule,
+    MoveModule,
     DeleteModule,
     LogsModule,
     SavedModule,
