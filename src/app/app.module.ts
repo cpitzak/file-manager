@@ -14,10 +14,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { HomeModule } from './home/home.module';
 import { OpenFolderModule } from './open-folder/open-folder.module';
 import { SideMenuModule } from './side-menu/side-menu.module';
-import { DetailModule } from './detail/detail.module';
+import { DeleteModule } from './delete/delete.module';
+import { LogsModule } from './logs/logs.module';
+import { SavedModule } from './saved/saved.module';
 
 import { AppComponent } from './app.component';
 
@@ -34,8 +35,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     HttpClientModule,
     CoreModule,
     SharedModule,
-    HomeModule,
-    DetailModule,
+    DeleteModule,
+    LogsModule,
+    SavedModule,
     OpenFolderModule,
     SideMenuModule,
     AppRoutingModule,

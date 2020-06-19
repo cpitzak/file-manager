@@ -3,7 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './shared/components';
 
 import { MoveRoutingModule } from './move/move-routing.module';
-import { DetailRoutingModule } from './detail/detail-routing.module';
+import { DeleteRoutingModule } from './delete/delete-routing.module';
+import { LogsRoutingModule } from './logs/logs-routing.module';
+import { SavedRoutingModule } from './saved/saved-routing.module';
 
 const routes: Routes = [
   {
@@ -21,7 +23,9 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     MoveRoutingModule,
-    DetailRoutingModule
+    DeleteRoutingModule,
+    LogsRoutingModule,
+    SavedRoutingModule,
   ],
   exports: [RouterModule]
 })
