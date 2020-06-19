@@ -6,7 +6,7 @@ export function duplicateName(name: string, existing: string[]): string {
     name.charAt(0) === " " ||
     name.charAt(name.length - 1) === " "
   ) {
-    return undefined;
+    return name;
   }
   let found: boolean = existing.findIndex((n: string) => n === name) !== -1
   if (found) {

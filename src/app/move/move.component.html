@@ -1,4 +1,4 @@
-<mat-tab-group mat-align-tabs="start">
+<mat-tab-group mat-align-tabs="start" animationDuration="0ms">
   <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.taskName">
     <div class="tab-container">
       <button mat-flat-button (click)="onDuplicateTab(tab)" color="accent">Duplicate</button>
