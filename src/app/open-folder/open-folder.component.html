@@ -1,1 +1,4 @@
-<p>open-folder works!</p>
+<mat-form-field [style.width.px]="inputWidth">
+  <input matInput placeholder="Source Folder" readonly="true" [value]="folderName">
+</mat-form-field>
+<button mat-flat-button (click)="onOpen()" color="accent">Open</button>
