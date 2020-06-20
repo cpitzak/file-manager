@@ -27,3 +27,10 @@ export function duplicateName(name: string, existing: string[]): string {
   }
   return name;
 }
+
+export function isLetterOrNumberStr(n: string) {
+  if (n == null) {
+    return false;
+  }
+  return n.match(/^[0-9a-zA-Z]+$/) !== null;
+}

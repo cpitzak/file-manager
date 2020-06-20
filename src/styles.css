@@ -16,18 +16,27 @@ html, body {
   -webkit-background-size: cover; /* pour anciens Chrome et Safari */
   background-size: cover; /* version standardisée */
 }
+/* css for custom menu bar */
 .window-controls-container {
   color: #ADADAD !important;
 }
+/* css for custom menu bar */
 .action-menu-item {
   color: #ADADAD !important;
 }
+/* css for custom menu bar */
 .titlebar, .titlebar > * {
   color: #ADADAD;
 }
+/* prevent matTab text being able to be highlighted */
 .mat-tab-label {
   user-select: none;
 }
+/* prevent matTab text being able to be highlighted */
 .mat-tab-label.mat-tab-label-active {
   user-select: none;
+}
+/* fix matInput text being clipped */
+.mat-input-element {
+  line-height: normal !important;
 }

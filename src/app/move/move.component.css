@@ -1,5 +1,5 @@
 .tab-container {
-  margin-top: 15px;
+  margin-top: 25px;
 }
 .close {
   margin-left: -8px;
@@ -14,4 +14,30 @@
 }
 .close:not(:disabled):not(.disabled) {
   cursor: pointer;
+}
+/* .row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-basis: 100%;
+  flex: 1;
+} */
+.sub-nav {
+  display:-webkit-flex;
+  display:flex;
+  list-style-type:none;
+  padding:0;
+  justify-content:flex-end;
+}
+.left {
+  margin-right:auto;
+}
+.right {
+  margin-right: 15px;
 }
