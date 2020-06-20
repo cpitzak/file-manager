@@ -22,9 +22,10 @@ export class MoveComponent implements OnInit {
   }
 
   onDuplicateTab(tab: Tab) {
-    if (tab == null) {
+    if (tab == null || tab.taskName.trim().length === 0) {
       return;
     }
+    tab.taskName = tab.taskName.trim();
     const existing: string[] = this.tabs.reduce(function(a, c) {
       return a.concat(c.taskName);
     }, []);
@@ -40,6 +41,13 @@ export class MoveComponent implements OnInit {
       return;
     }
     this.tabs.splice(index, 1);
+  }
+
+  onSave(tab: Tab) {
+    if (tab == null) {
+      return;
+    }
+    tab.taskName = tab.taskName.trim();
   }
 
 }
