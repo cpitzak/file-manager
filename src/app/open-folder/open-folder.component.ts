@@ -9,7 +9,6 @@ const app = remote.app;
   styleUrls: ["./open-folder.component.css"],
 })
 export class OpenFolderComponent implements OnInit {
-  @Input() inputWidth: number = 327;
   folderName: string = '';
   constructor() {}
 

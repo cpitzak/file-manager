@@ -15,24 +15,16 @@
 .close:not(:disabled):not(.disabled) {
   cursor: pointer;
 }
-/* .row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-}
-.column {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-basis: 100%;
-  flex: 1;
+/* .tab-container {
+  display: block;
+  padding: 0px;
+  margin: 0px;
 } */
 .sub-nav {
-  display:-webkit-flex;
   display:flex;
   list-style-type:none;
-  padding:0;
+  padding:0px;
+  margin: 0px;
   justify-content:flex-end;
 }
 .left {

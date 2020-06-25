@@ -5,6 +5,7 @@ html, body {
   height: 100%;
   overflow: hidden;
   font-family: 'Roboto Regular', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none !important;
 }
 .container {
   height: 100%;
