@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Tab } from './model/tab';
 
 import * as utils from '../core/model/utilities/utils';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-move',
@@ -16,6 +17,9 @@ export class MoveComponent implements OnInit {
     }
   ];
   showClose: boolean = false;
+  form: FormGroup = new FormGroup({
+    sourceFolder: new FormControl('', [Validators.required]),
+  })
   constructor() { }
 
   ngOnInit(): void {

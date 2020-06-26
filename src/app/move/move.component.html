@@ -21,7 +21,8 @@
           <button mat-stroked-button color="accent" (click)="onSave(tab)">Save</button>
         </li>
       </ul>
-      <app-open-folder></app-open-folder>
+      <app-open-folder [formControl]="form.controls['sourceFolder']"></app-open-folder>
     </div>
   </mat-tab>
 </mat-tab-group>
+{{ form.value | json }}

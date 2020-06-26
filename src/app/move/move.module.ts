@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { OpenFolderModule } from "../open-folder/open-folder.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [MoveComponent],
@@ -20,7 +21,9 @@ import { OpenFolderModule } from "../open-folder/open-folder.module";
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
-    OpenFolderModule
+    OpenFolderModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class MoveModule {}

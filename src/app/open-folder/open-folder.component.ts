@@ -1,4 +1,5 @@
-import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__, Input } from "@angular/core";
+import { Component, Self } from "@angular/core";
+import { FormGroup, FormControl, Validators, NgControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 const { shell } = require("electron"); // deconstructing assignment
 const remote = require("electron").remote;
 const app = remote.app;
@@ -8,11 +9,23 @@ const app = remote.app;
   templateUrl: "./open-folder.component.html",
   styleUrls: ["./open-folder.component.css"],
 })
-export class OpenFolderComponent implements OnInit {
-  folderName: string = '';
-  constructor() {}
+export class OpenFolderComponent implements ControlValueAccessor {
+  constructor(@Self() public ngControl: NgControl) {
+    this.ngControl.valueAccessor = this;
+  }
 
-  ngOnInit(): void {}
+  writeValue(obj: any): void {
+    throw new Error("Method not implemented.");
+  }
+  registerOnChange(fn: any): void {
+    throw new Error("Method not implemented.");
+  }
+  registerOnTouched(fn: any): void {
+    throw new Error("Method not implemented.");
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    throw new Error("Method not implemented.");
+  }
 
   onOpen() {
     const desktop: string = app.getPath("desktop");
@@ -22,6 +35,7 @@ export class OpenFolderComponent implements OnInit {
       defaultPath: desktop,
       properties: ["openDirectory"],
     });
-    this.folderName = srcFolder?.length > 0 ? srcFolder[0] : '';
+    const folderName = srcFolder?.length > 0 ? srcFolder[0] : '';
+    this.ngControl.control.setValue(folderName);
   }
 }
