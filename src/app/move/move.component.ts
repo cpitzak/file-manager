@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 
 import { Tab } from './model/tab';
 
 import * as utils from '../core/model/utilities/utils';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatTab, MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-move',
@@ -18,26 +19,28 @@ export class MoveComponent implements OnInit {
   ];
   showClose: boolean = false;
   form: FormGroup = new FormGroup({
+    taskName: new FormControl('', [Validators.required]),
     sourceFolder: new FormControl('', [Validators.required]),
   })
-  constructor() { }
+  constructor(private cdf: ChangeDetectorRef) { }
 
   ngOnInit(): void {
   }
 
-  onDuplicateTab(tab: Tab) {
-    if (tab == null || tab.taskName.trim().length === 0) {
+  onDuplicateTab(taskName: string) {
+    if (taskName == null || taskName.trim().length === 0) {
       return;
     }
-    tab.taskName = tab.taskName.trim();
+    taskName = taskName.trim();
     const existing: string[] = this.tabs.reduce(function(a, c) {
       return a.concat(c.taskName);
     }, []);
-    const taskName: string = utils.duplicateName(tab.taskName, existing);
+    const newTaskName: string = utils.duplicateName(taskName, existing);
     const newTab: Tab = {
-      taskName
+      taskName: newTaskName
     }
     this.tabs.push(newTab);
+    this.cdf.detectChanges();
   }
 
   onRemoveTab(index: number) {

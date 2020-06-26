@@ -1,0 +1,17 @@
+<div class="tab-container">
+  <ul class="sub-nav">
+    <li class="left">
+      <mat-form-field>
+        <input matInput [formControl]="form.controls[FormName.TaskName]" placeholder="Enter Task Name" required>
+      </mat-form-field>
+    </li>
+    <li class="right">
+      <button mat-stroked-button (click)="onDuplicateTab()" color="accent">Duplicate</button>
+    </li>
+    <li class="right">
+      <button mat-stroked-button color="accent" (click)="onSave()" [disabled]="form.invalid">Save</button>
+    </li>
+  </ul>
+  <app-open-folder [formControl]="form.controls[FormName.SourceFolder]"></app-open-folder>
+</div>
+{{ form.value | json }}

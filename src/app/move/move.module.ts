@@ -10,9 +10,10 @@ import { MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { OpenFolderModule } from "../open-folder/open-folder.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { TaskFormComponent } from './task-form/task-form.component';
 
 @NgModule({
-  declarations: [MoveComponent],
+  declarations: [MoveComponent, TaskFormComponent],
   imports: [
     CommonModule,
     SharedModule,

@@ -1,28 +1,13 @@
 <!-- https://stackblitz.com/edit/mat-tabs-closing-example?file=app%2Ftab-group-basic-example.html -->
-<mat-tab-group mat-align-tabs="start" animationDuration="0ms">
-  <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.taskName">
-    <div class="tab-container">
-      <ng-template *ngIf="tabs.length > 1 && tabs[0].taskName !== tab.taskName" mat-tab-label>
-        {{tab.taskName}}
-        <button class="close" mat-icon-button (click)="onRemoveTab(index)">
-          <span aria-hidden="true">×</span>
-        </button>
-      </ng-template>
-      <ul class="sub-nav">
-        <li class="left">
-          <mat-form-field>
-            <input matInput placeholder="Enter Task Name" [(ngModel)]=tab.taskName>
-          </mat-form-field>
-        </li>
-        <li class="right">
-          <button mat-stroked-button (click)="onDuplicateTab(tab)" color="accent">Duplicate</button>
-        </li>
-        <li class="right">
-          <button mat-stroked-button color="accent" (click)="onSave(tab)" [disabled]="form.invalid">Save</button>
-        </li>
-      </ul>
-      <app-open-folder [formControl]="form.controls['sourceFolder']"></app-open-folder>
-    </div>
+<mat-tab-group #matTabsGroup mat-align-tabs="start" animationDuration="0ms">
+  <mat-tab #matTabs *ngFor="let tab of tabs; let index = index" [label]="tab.taskName">
+    <ng-template *ngIf="tabs.length > 1 && tabs[0].taskName !== tab.taskName" mat-tab-label>
+      {{tab.taskName}}
+      <button class="close" mat-icon-button (click)="onRemoveTab(index)">
+        <span aria-hidden="true">×</span>
+      </button>
+    </ng-template>
+    <app-task-form [tab]="tab" (duplicate)="onDuplicateTab($event)"></app-task-form>
   </mat-tab>
 </mat-tab-group>
-{{ form.value | json }}
+<!-- {{ form.value | json }} -->
