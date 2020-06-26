@@ -1,9 +1,9 @@
 import { FormControl, ValidationErrors } from '@angular/forms';
-import { SourceFolder } from '../../core/model/task/source-folder';
+import { Folder } from '../../core/model/task/folder';
 
 export function validateSourceFolder(formControl: FormControl): ValidationErrors | null {
   const min: number = 1;
-  const sourceFolder: SourceFolder = formControl.value;
+  const sourceFolder: Folder = formControl.value;
   const error = {
     folderError: {
       given: sourceFolder?.name,

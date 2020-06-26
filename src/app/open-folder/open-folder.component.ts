@@ -1,34 +1,43 @@
-import { Component, Self, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, AfterContentChecked } from "@angular/core";
+import { Component, Self, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, AfterContentChecked, Input } from "@angular/core";
 import { NgControl, NG_VALIDATORS, Validator, AbstractControl, ValidationErrors, FormControl } from "@angular/forms";
 import { BaseControlValueAccessor } from "../core/model/base-control-value-accessor";
-import { SourceFolder } from "../core/model/task/source-folder";
+import { Folder } from "../core/model/task/folder";
 import { MatCheckbox } from "@angular/material/checkbox";
 const { shell } = require("electron"); // deconstructing assignment
 const remote = require("electron").remote;
 const app = remote.app;
+
+export interface OpenFolderOpts {
+  showIncludeSubfolder?: boolean;
+  showPutInSubfolder?: boolean;
+}
 
 @Component({
   selector: "app-open-folder",
   templateUrl: "./open-folder.component.html",
   styleUrls: ["./open-folder.component.css"],
 })
-export class OpenFolderComponent implements BaseControlValueAccessor<SourceFolder>, AfterViewInit  {
+export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, AfterViewInit  {
   @ViewChild("checkbox") checkbox: MatCheckbox;
   @ViewChild("input") input: ElementRef;
+  @Input('opts') opts: OpenFolderOpts = {
+    showIncludeSubfolder: false,
+    showPutInSubfolder: false
+  };
 
   constructor(@Self() public ngControl: NgControl, private cdf: ChangeDetectorRef) {
     this.ngControl.valueAccessor = this;
   }
 
   ngAfterViewInit(): void {
-    const sourceFolder: SourceFolder = this.ngControl.control.value;
-    this.input.nativeElement.value = sourceFolder?.name;
+    const folder: Folder = this.ngControl.control.value;
+    this.input.nativeElement.value = folder?.name;
     // to avoid error: ExpressionChangedAfterItHasBeenCheckedError
     this.cdf.detectChanges();
   }
 
   public disabled: boolean;
-  public onChange(newVal: SourceFolder): void {
+  public onChange(newVal: Folder): void {
     if (this.input) {
       this.input.nativeElement.value = newVal.name;
     }
@@ -36,8 +45,8 @@ export class OpenFolderComponent implements BaseControlValueAccessor<SourceFolde
   public onTouched(_?: any): void {
     throw new Error("Method not implemented.");
   }
-  public value: SourceFolder;
-  public writeValue(obj: SourceFolder): void {
+  public value: Folder;
+  public writeValue(obj: Folder): void {
     this.onChange(obj);
   }
   public registerOnChange(fn: any): void {
@@ -52,21 +61,23 @@ export class OpenFolderComponent implements BaseControlValueAccessor<SourceFolde
 
   onOpen() {
     const desktop: string = app.getPath("desktop");
-    const srcFolder: string[] | undefined = remote.dialog.showOpenDialogSync({
+    const folderStr: string[] | undefined = remote.dialog.showOpenDialogSync({
       defaultPath: desktop,
       properties: ["openDirectory"],
     });
-    const name: string = srcFolder?.length > 0 ? srcFolder[0] : "";
-    const sourceFolder: SourceFolder = {
+    const name: string = folderStr?.length > 0 ? folderStr[0] : "";
+    let folder: Folder = {
       name,
-      includeSubfolders: this.checkbox.checked,
     };
-    this.ngControl.control.setValue(sourceFolder);
+    if (this.opts.showIncludeSubfolder) {
+      folder.includeSubfolders = this.checkbox.checked;
+    }
+    this.ngControl.control.setValue(folder);
     this.input.nativeElement.value = name;
   }
 
   onCheckboxChange(event: MatCheckbox) {
-    let sourceFolder: SourceFolder = this.ngControl.control.value;
-    sourceFolder.includeSubfolders = event.checked;
+    let folder: Folder = this.ngControl.control.value;
+    folder.includeSubfolders = event.checked;
   }
 }

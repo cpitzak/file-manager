@@ -2,12 +2,14 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MoveTask } from '../../core/model/task/move-task';
 import { Tab } from '../model/tab';
-import { SourceFolder } from '../../core/model/task/source-folder';
+import { Folder } from '../../core/model/task/folder';
 import { validateSourceFolder } from '../../open-folder/validators/source-folder-validator';
+import { OpenFolderOpts } from '../../open-folder/open-folder.component';
 
 export enum FormName {
   TaskName = 'taskName',
-  SourceFolder = 'sourceFolder'
+  SourceFolder = 'sourceFolder',
+  DestinationFolder = 'destinationFolder'
 }
 
 @Component({
@@ -31,17 +33,16 @@ export class TaskFormComponent implements OnInit {
     return this._tab;
   }
 
-  s: SourceFolder = {
-    name: '',
-    includeSubfolders: false
-  }
-
   form: FormGroup = new FormGroup({
     [FormName.TaskName]: new FormControl('', [Validators.required]),
     [FormName.SourceFolder]: new FormControl({
       name: '',
       includeSubfolders: false
-    } as SourceFolder, [Validators.required, validateSourceFolder]),
+    } as Folder, [Validators.required, validateSourceFolder]),
+    [FormName.DestinationFolder]: new FormControl({
+      name: '',
+      putInSubfolder: false
+    } as Folder, [Validators.required, validateSourceFolder]),
   });
 
   get taskName(): string {
@@ -49,6 +50,7 @@ export class TaskFormComponent implements OnInit {
   }
 
   FormName = FormName;
+  sourceFolderOpts: OpenFolderOpts = { showIncludeSubfolder: true };
 
   constructor() { }
 
