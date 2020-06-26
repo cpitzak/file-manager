@@ -1,5 +1,5 @@
-import { Component, Self, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef } from "@angular/core";
-import { NgControl } from "@angular/forms";
+import { Component, Self, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, AfterContentChecked } from "@angular/core";
+import { NgControl, NG_VALIDATORS, Validator, AbstractControl, ValidationErrors, FormControl } from "@angular/forms";
 import { BaseControlValueAccessor } from "../core/model/base-control-value-accessor";
 import { SourceFolder } from "../core/model/task/source-folder";
 import { MatCheckbox } from "@angular/material/checkbox";
@@ -7,18 +7,32 @@ const { shell } = require("electron"); // deconstructing assignment
 const remote = require("electron").remote;
 const app = remote.app;
 
+export function validateSourceFolder(formControl: FormControl) {
+  const min: number = 1;
+  const sourceFolder: SourceFolder = formControl.value;
+  const error = {
+    folderError: {
+      given: sourceFolder?.name,
+      min
+    }
+  };
+  return (sourceFolder.name?.length >= min) ? null : error;
+}
+
 @Component({
   selector: "app-open-folder",
   templateUrl: "./open-folder.component.html",
   styleUrls: ["./open-folder.component.css"],
+  providers: [{ provide: NG_VALIDATORS, useValue: validateSourceFolder, multi: true }],
 })
-export class OpenFolderComponent implements BaseControlValueAccessor<SourceFolder>, AfterViewInit {
+export class OpenFolderComponent implements BaseControlValueAccessor<SourceFolder>, AfterViewInit  {
   @ViewChild("checkbox") checkbox: MatCheckbox;
   @ViewChild("input") input: ElementRef;
 
   constructor(@Self() public ngControl: NgControl, private cdf: ChangeDetectorRef) {
     this.ngControl.valueAccessor = this;
   }
+
   ngAfterViewInit(): void {
     const sourceFolder: SourceFolder = this.ngControl.control.value;
     this.input.nativeElement.value = sourceFolder?.name;
@@ -65,7 +79,6 @@ export class OpenFolderComponent implements BaseControlValueAccessor<SourceFolde
   }
 
   onCheckboxChange(event: MatCheckbox) {
-    console.log(event);
     let sourceFolder: SourceFolder = this.ngControl.control.value;
     sourceFolder.includeSubfolders = event.checked;
   }
