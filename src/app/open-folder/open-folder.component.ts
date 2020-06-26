@@ -20,7 +20,8 @@ export class OpenFolderComponent implements BaseControlValueAccessor<SourceFolde
     this.ngControl.valueAccessor = this;
   }
   ngAfterViewInit(): void {
-    this.input.nativeElement.value = this.ngControl.control.value.name;
+    const sourceFolder: SourceFolder = this.ngControl.control.value;
+    this.input.nativeElement.value = sourceFolder?.name;
     // to avoid error: ExpressionChangedAfterItHasBeenCheckedError
     this.cdf.detectChanges();
   }
