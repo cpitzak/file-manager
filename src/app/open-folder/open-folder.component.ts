@@ -59,4 +59,11 @@ export class OpenFolderComponent implements BaseControlValueAccessor<SourceFolde
     this.ngControl.control.setValue(sourceFolder);
     this.input.nativeElement.value = name;
   }
+
+  onCheckboxChange(event: MatCheckbox) {
+    console.log(event);
+    let sourceFolder: SourceFolder = this.ngControl.control.value;
+    sourceFolder.includeSubfolders = event.checked;
+  }
+
 }

@@ -12,5 +12,5 @@
     </li>
   </ul>
   <div class="break"></div>
-  <mat-checkbox #checkbox class="subfolders">Include subfolders</mat-checkbox>
+  <mat-checkbox #checkbox class="subfolders" [class.is-invalid]="ngControl.invalid" (change)="onCheckboxChange($event)">Include subfolders</mat-checkbox>
 </div>

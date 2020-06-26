@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MoveTask } from '../../core/model/task/move-task';
 import { Tab } from '../model/tab';
+import { SourceFolder } from '../../core/model/task/source-folder';
 
 export enum FormName {
   TaskName = 'taskName',
@@ -29,9 +30,17 @@ export class TaskFormComponent implements OnInit {
     return this._tab;
   }
 
+  s: SourceFolder = {
+    name: '',
+    includeSubfolders: false
+  }
+
   form: FormGroup = new FormGroup({
     [FormName.TaskName]: new FormControl('', [Validators.required]),
-    [FormName.SourceFolder]: new FormControl('', [Validators.required]),
+    [FormName.SourceFolder]: new FormControl({
+      name: '',
+      includeSubfolders: false
+    } as SourceFolder, [Validators.required]),
   });
 
   get taskName(): string {
