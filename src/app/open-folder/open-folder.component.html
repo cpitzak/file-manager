@@ -3,11 +3,9 @@
     <li class="left">
       <mat-form-field style="width: 100%">
         <input #input matInput placeholder="Source Folder" readonly="true"
-          [formControl]="ngControl.control" [class.is-invalid]="ngControl.invalid">
+          [formControl]="ngControl.control" [class.is-invalid]="ngControl.invalid" required>
+        <mat-hint *ngIf="ngControl.hasError('required')" align="end" class="required">Please select a folder</mat-hint>
       </mat-form-field>
-      <!-- <div class="invalid-feedback" *ngIf="ngControl.hasError('required')">
-        (*) Required
-      </div> -->
     </li>
     <li class="right">
       <button class="btn" mat-stroked-button (click)="onOpen()" color="accent">Open</button>
@@ -16,11 +14,3 @@
   <div class="break"></div>
   <mat-checkbox #checkbox class="subfolders">Include subfolders</mat-checkbox>
 </div>
-
-<!-- https://medium.com/@joaqcid/angular-custom-form-controls-series-3d56884bdb99
-
-and
-
-https://stackblitz.com/edit/angular-firebase-sick-tips?file=src%2Fapp%2Freusable-form-control%2Ftext-field%2Ftext-field.component.html
-
--->

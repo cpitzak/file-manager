@@ -18,7 +18,7 @@
           <button mat-stroked-button (click)="onDuplicateTab(tab)" color="accent">Duplicate</button>
         </li>
         <li class="right">
-          <button mat-stroked-button color="accent" (click)="onSave(tab)">Save</button>
+          <button mat-stroked-button color="accent" (click)="onSave(tab)" [disabled]="form.invalid">Save</button>
         </li>
       </ul>
       <app-open-folder [formControl]="form.controls['sourceFolder']"></app-open-folder>
