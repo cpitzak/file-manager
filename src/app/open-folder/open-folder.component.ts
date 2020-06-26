@@ -8,6 +8,7 @@ const remote = require("electron").remote;
 const app = remote.app;
 
 export interface OpenFolderOpts {
+  openFolderPlaceholder: string;
   showIncludeSubfolder?: boolean;
   showPutInSubfolder?: boolean;
 }
@@ -21,6 +22,7 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
   @ViewChild("checkbox") checkbox: MatCheckbox;
   @ViewChild("input") input: ElementRef;
   @Input('opts') opts: OpenFolderOpts = {
+    openFolderPlaceholder: '',
     showIncludeSubfolder: false,
     showPutInSubfolder: false
   };

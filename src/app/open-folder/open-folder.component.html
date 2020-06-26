@@ -2,7 +2,7 @@
   <ul class="sub-nav">
     <li class="left">
       <mat-form-field style="width: 100%">
-        <input #input matInput placeholder="Source Folder" readonly="true"
+        <input #input matInput [placeholder]="opts.openFolderPlaceholder" readonly="true"
           [formControl]="ngControl.control" [class.is-invalid]="ngControl.invalid" required>
         <mat-hint *ngIf="ngControl.hasError('required')" align="end" class="required">Please select a folder</mat-hint>
       </mat-form-field>
@@ -14,4 +14,6 @@
   <div class="break"></div>
   <mat-checkbox #checkbox *ngIf="opts.showIncludeSubfolder" class="subfolders" [class.is-invalid]="ngControl.invalid"
    (change)="onCheckboxChange($event)">Include subfolders</mat-checkbox>
+  <mat-checkbox #checkbox2 *ngIf="opts.showPutInSubfolder" class="subfolders" [class.is-invalid]="ngControl.invalid"
+   (change)="onCheckboxChange($event)">Put in subfolder with format: </mat-checkbox>
 </div>

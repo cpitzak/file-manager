@@ -50,7 +50,8 @@ export class TaskFormComponent implements OnInit {
   }
 
   FormName = FormName;
-  sourceFolderOpts: OpenFolderOpts = { showIncludeSubfolder: true };
+  sourceFolderOpts: OpenFolderOpts = { openFolderPlaceholder: 'Source Folder', showIncludeSubfolder: true };
+  destinationFolderOpts: OpenFolderOpts = { openFolderPlaceholder: 'Destination Folder', showPutInSubfolder: true };
 
   constructor() { }
 

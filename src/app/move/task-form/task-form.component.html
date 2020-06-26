@@ -13,5 +13,6 @@
     </li>
   </ul>
   <app-open-folder [formControl]="form.controls[FormName.SourceFolder]" [opts]="sourceFolderOpts"></app-open-folder>
+  <app-open-folder [formControl]="form.controls[FormName.DestinationFolder]" [opts]="destinationFolderOpts"></app-open-folder>
 </div>
 {{ form.value | json }}
