@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MoveTask } from '../../core/model/task/move-task';
 import { Tab } from '../model/tab';
 import { SourceFolder } from '../../core/model/task/source-folder';
-import { validateSourceFolder } from '../../core/validators/source-folder-validator';
+import { validateSourceFolder } from '../../open-folder/validators/source-folder-validator';
 
 export enum FormName {
   TaskName = 'taskName',
