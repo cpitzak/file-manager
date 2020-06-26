@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { OpenFolderModule } from "../open-folder/open-folder.module";
+import { RulesModule } from "../rules/rules.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TaskFormComponent } from './task-form/task-form.component';
 
@@ -25,6 +26,7 @@ import { TaskFormComponent } from './task-form/task-form.component';
     OpenFolderModule,
     FormsModule,
     ReactiveFormsModule,
+    RulesModule,
   ],
 })
 export class MoveModule {}

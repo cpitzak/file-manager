@@ -1,3 +1,5 @@
+<mat-card class="card mat-elevation-z0">
+  <mat-card-content>
 <div class="container">
   <ul class="sub-nav">
     <li class="left">
@@ -23,7 +25,7 @@
    <ng-container *ngIf="opts.showPutInSubfolder">
     <mat-checkbox #checkbox2 class="subfolders" [class.is-invalid]="ngControl.invalid"
     (change)="onPutInSubfolder($event)">Put in subfolder with format: </mat-checkbox>
-    <mat-form-field style="margin-left: 15px">
+    <mat-form-field style="margin-left: 15px;">
      <mat-select [(value)]="selected" [disabled]="!ngControl.control.value.putInSubfolder" (selectionChange)="onSelectionChange($event)">
        <mat-option [value]="FolderFormatOption.MonthYear">month-year</mat-option>
        <mat-option [value]="FolderFormatOption.DayMonthYear">day-month-year</mat-option>
@@ -31,3 +33,5 @@
    </mat-form-field>
    </ng-container>
 </div>
+</mat-card-content>
+</mat-card>
