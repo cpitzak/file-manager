@@ -1,8 +1,5 @@
 import { Folder } from "./folder";
 
-export class SourceFolder extends Folder {
+export interface SourceFolder extends Folder {
   includeSubfolders: boolean;
-  constructor(name: string) {
-    super(name);
-  }
 }

@@ -1,6 +1,3 @@
-export abstract class Folder {
+export interface Folder {
   name: string;
-  constructor(name: string) {
-    this.name = name;
-  }
 }

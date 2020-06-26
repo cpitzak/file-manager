@@ -2,7 +2,7 @@
   <ul class="sub-nav">
     <li class="left">
       <mat-form-field style="width: 100%">
-        <input matInput placeholder="Source Folder" readonly="true"
+        <input #input matInput placeholder="Source Folder" readonly="true"
           [formControl]="ngControl.control" [class.is-invalid]="ngControl.invalid">
       </mat-form-field>
       <!-- <div class="invalid-feedback" *ngIf="ngControl.hasError('required')">
@@ -14,7 +14,7 @@
     </li>
   </ul>
   <div class="break"></div>
-  <mat-checkbox class="subfolders">Include subfolders</mat-checkbox>
+  <mat-checkbox #checkbox class="subfolders">Include subfolders</mat-checkbox>
 </div>
 
 <!-- https://medium.com/@joaqcid/angular-custom-form-controls-series-3d56884bdb99

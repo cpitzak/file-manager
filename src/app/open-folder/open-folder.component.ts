@@ -1,29 +1,45 @@
-import { Component, Self } from "@angular/core";
+import { Component, Self, ViewChild, ElementRef } from "@angular/core";
 import { FormGroup, FormControl, Validators, NgControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { BaseControlValueAccessor } from '../core/model/base-control-value-accessor';
+import { SourceFolder } from '../core/model/task/source-folder';
+import { MatCheckbox } from "@angular/material/checkbox";
+import { MatInputModule, MatInput } from "@angular/material/input";
 const { shell } = require("electron"); // deconstructing assignment
 const remote = require("electron").remote;
 const app = remote.app;
+
 
 @Component({
   selector: "app-open-folder",
   templateUrl: "./open-folder.component.html",
   styleUrls: ["./open-folder.component.css"],
 })
-export class OpenFolderComponent implements ControlValueAccessor {
+export class OpenFolderComponent implements BaseControlValueAccessor<SourceFolder> {
+  @ViewChild('checkbox') checkbox: MatCheckbox;
+  @ViewChild('input') input: ElementRef;
+
   constructor(@Self() public ngControl: NgControl) {
     this.ngControl.valueAccessor = this;
   }
 
-  writeValue(obj: any): void {
+  public disabled: boolean;
+  public onChange(newVal: SourceFolder): void {
     throw new Error("Method not implemented.");
   }
-  registerOnChange(fn: any): void {
+  public onTouched(_?: any): void {
     throw new Error("Method not implemented.");
   }
-  registerOnTouched(fn: any): void {
+  public value: SourceFolder;
+  public writeValue(obj: SourceFolder): void {
     throw new Error("Method not implemented.");
   }
-  setDisabledState?(isDisabled: boolean): void {
+  public registerOnChange(fn: any): void {
+    throw new Error("Method not implemented.");
+  }
+  public registerOnTouched(fn: any): void {
+    throw new Error("Method not implemented.");
+  }
+  public setDisabledState?(isDisabled: boolean): void {
     throw new Error("Method not implemented.");
   }
 
@@ -35,7 +51,12 @@ export class OpenFolderComponent implements ControlValueAccessor {
       defaultPath: desktop,
       properties: ["openDirectory"],
     });
-    const folderName = srcFolder?.length > 0 ? srcFolder[0] : '';
-    this.ngControl.control.setValue(folderName);
+    const name: string = srcFolder?.length > 0 ? srcFolder[0] : '';
+    const sourceFolder: SourceFolder = {
+      name,
+      includeSubfolders: this.checkbox.checked
+    }
+    this.ngControl.control.setValue(sourceFolder);
+    this.input.nativeElement.value = name;
   }
 }
