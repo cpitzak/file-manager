@@ -7,23 +7,10 @@ const { shell } = require("electron"); // deconstructing assignment
 const remote = require("electron").remote;
 const app = remote.app;
 
-export function validateSourceFolder(formControl: FormControl) {
-  const min: number = 1;
-  const sourceFolder: SourceFolder = formControl.value;
-  const error = {
-    folderError: {
-      given: sourceFolder?.name,
-      min
-    }
-  };
-  return (sourceFolder.name?.length >= min) ? null : error;
-}
-
 @Component({
   selector: "app-open-folder",
   templateUrl: "./open-folder.component.html",
   styleUrls: ["./open-folder.component.css"],
-  providers: [{ provide: NG_VALIDATORS, useValue: validateSourceFolder, multi: true }],
 })
 export class OpenFolderComponent implements BaseControlValueAccessor<SourceFolder>, AfterViewInit  {
   @ViewChild("checkbox") checkbox: MatCheckbox;

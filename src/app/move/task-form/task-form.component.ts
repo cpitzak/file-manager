@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MoveTask } from '../../core/model/task/move-task';
 import { Tab } from '../model/tab';
 import { SourceFolder } from '../../core/model/task/source-folder';
+import { validateSourceFolder } from '../../core/validators/source-folder-validator';
 
 export enum FormName {
   TaskName = 'taskName',
@@ -40,7 +41,7 @@ export class TaskFormComponent implements OnInit {
     [FormName.SourceFolder]: new FormControl({
       name: '',
       includeSubfolders: false
-    } as SourceFolder, [Validators.required]),
+    } as SourceFolder, [Validators.required, validateSourceFolder]),
   });
 
   get taskName(): string {
