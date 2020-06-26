@@ -3,6 +3,7 @@ import { NgControl, NG_VALIDATORS, Validator, AbstractControl, ValidationErrors,
 import { BaseControlValueAccessor } from "../core/model/base-control-value-accessor";
 import { Folder } from "../core/model/task/folder";
 import { MatCheckbox } from "@angular/material/checkbox";
+import { MatSelectChange } from "@angular/material/select";
 const { shell } = require("electron"); // deconstructing assignment
 const remote = require("electron").remote;
 const app = remote.app;
@@ -25,6 +26,7 @@ export enum FolderFormatOption {
 })
 export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, AfterViewInit  {
   @ViewChild("checkbox") checkbox: MatCheckbox;
+  @ViewChild("checkbox2") checkbox2: MatCheckbox;
   @ViewChild("input") input: ElementRef;
   @Input('opts') opts: OpenFolderOpts = {
     openFolderPlaceholder: '',
@@ -82,6 +84,10 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
     if (this.opts.showIncludeSubfolder) {
       folder.includeSubfolders = this.checkbox.checked;
     }
+    if (this.opts.showPutInSubfolder && this.checkbox2.checked) {
+      folder.putInSubfolder = true;
+      folder.subfolderFormat = this.selected;
+    }
     this.ngControl.control.setValue(folder);
     this.input.nativeElement.value = name;
   }
@@ -94,6 +100,12 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
   onPutInSubfolder(event: MatCheckbox) {
     let folder: Folder = this.ngControl.control.value;
     folder.putInSubfolder = event.checked;
+    folder.subfolderFormat = event.checked ? this.selected : undefined;
+  }
+
+  onSelectionChange(event: MatSelectChange) {
+    let folder: Folder = this.ngControl.control.value;
+    folder.subfolderFormat = event.value;
   }
 
 }
