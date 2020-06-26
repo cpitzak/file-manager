@@ -1,6 +1,7 @@
 <div class="container">
   <ul class="sub-nav">
     <li class="left">
+      <!-- input box -->
       <mat-form-field style="width: 100%">
         <input #input matInput [placeholder]="opts.openFolderPlaceholder" readonly="true"
           [formControl]="ngControl.control" [class.is-invalid]="ngControl.invalid" required>
@@ -8,12 +9,25 @@
       </mat-form-field>
     </li>
     <li class="right">
+      <!-- open button -->
       <button class="btn" mat-stroked-button (click)="onOpen()" color="accent">Open</button>
     </li>
   </ul>
   <div class="break"></div>
+
+  <!-- include subfolder option -->
   <mat-checkbox #checkbox *ngIf="opts.showIncludeSubfolder" class="subfolders" [class.is-invalid]="ngControl.invalid"
-   (change)="onCheckboxChange($event)">Include subfolders</mat-checkbox>
-  <mat-checkbox #checkbox2 *ngIf="opts.showPutInSubfolder" class="subfolders" [class.is-invalid]="ngControl.invalid"
-   (change)="onCheckboxChange($event)">Put in subfolder with format: </mat-checkbox>
+   (change)="onIncludeSubfolders($event)">Include subfolders</mat-checkbox>
+
+   <!-- put in subfolder option -->
+   <ng-container *ngIf="opts.showPutInSubfolder">
+    <mat-checkbox #checkbox2 class="subfolders" [class.is-invalid]="ngControl.invalid"
+    (change)="onPutInSubfolder($event)">Put in subfolder with format: </mat-checkbox>
+    <mat-form-field style="margin-left: 15px">
+     <mat-select [(value)]="selected">
+       <mat-option [value]="FolderFormatOption.MonthYear">month-year</mat-option>
+       <mat-option [value]="FolderFormatOption.DayMonthYear">day-month-year</mat-option>
+     </mat-select>
+   </mat-form-field>
+   </ng-container>
 </div>

@@ -13,6 +13,11 @@ export interface OpenFolderOpts {
   showPutInSubfolder?: boolean;
 }
 
+export enum FolderFormatOption {
+  MonthYear = 'month-year',
+  DayMonthYear = 'day-month-year'
+}
+
 @Component({
   selector: "app-open-folder",
   templateUrl: "./open-folder.component.html",
@@ -26,6 +31,9 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
     showIncludeSubfolder: false,
     showPutInSubfolder: false
   };
+
+  FolderFormatOption = FolderFormatOption;
+  selected = FolderFormatOption.MonthYear;
 
   constructor(@Self() public ngControl: NgControl, private cdf: ChangeDetectorRef) {
     this.ngControl.valueAccessor = this;
@@ -78,8 +86,14 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
     this.input.nativeElement.value = name;
   }
 
-  onCheckboxChange(event: MatCheckbox) {
+  onIncludeSubfolders(event: MatCheckbox) {
     let folder: Folder = this.ngControl.control.value;
     folder.includeSubfolders = event.checked;
   }
+
+  onPutInSubfolder(event: MatCheckbox) {
+    let folder: Folder = this.ngControl.control.value;
+    folder.putInSubfolder = event.checked;
+  }
+
 }

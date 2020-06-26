@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { OpenFolderComponent } from './open-folder.component';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { OpenFolderComponent } from "./open-folder.component";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
   declarations: [OpenFolderComponent],
@@ -17,8 +17,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatButtonModule,
     MatCheckboxModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule,
   ],
-  exports: [OpenFolderComponent]
+  exports: [OpenFolderComponent],
 })
-export class OpenFolderModule { }
+export class OpenFolderModule {}
