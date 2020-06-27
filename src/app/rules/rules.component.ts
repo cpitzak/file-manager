@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { MatCheckboxChange, MatCheckbox } from '@angular/material/checkbox';
 import { MatSelect } from '@angular/material/select';
+import { MatInput } from '@angular/material/input';
 
 export enum FileMatch {
   Matches = 'matches',
@@ -20,6 +21,7 @@ export enum FileMatch {
 export class RulesComponent implements OnInit, AfterViewInit {
   @ViewChild('filenameCheckbox') filenameCheckbox: MatCheckbox;
   @ViewChild('fileMatSelect') fileMatSelect: MatSelect;
+  @ViewChild('textInput') textInput: ElementRef;
   FileMatch = FileMatch;
   fileMatchSelection: FileMatch = FileMatch.Matches;
 
@@ -27,6 +29,7 @@ export class RulesComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.fileMatSelect.disabled = !this.filenameCheckbox.checked;
+    this.textInput.nativeElement.disabled = !this.filenameCheckbox.checked;
     this.cdf.detectChanges();
   }
 
@@ -35,6 +38,10 @@ export class RulesComponent implements OnInit, AfterViewInit {
 
   onFilenameCheckboxChange(event: MatCheckboxChange) {
     this.fileMatSelect.disabled = !event.checked;
+    this.textInput.nativeElement.disabled = !event.checked;
+    if (!event.checked) {
+      this.textInput.nativeElement.value = '';
+    }
   }
 
 }
