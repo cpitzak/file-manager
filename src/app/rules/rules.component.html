@@ -6,6 +6,19 @@
       <mat-checkbox>Document files</mat-checkbox>
       <mat-checkbox>Audio files</mat-checkbox>
       <mat-checkbox>Video files</mat-checkbox>
+      <div class="row">
+        <mat-checkbox #filenameCheckbox (change)="onFilenameCheckboxChange($event)">Filename</mat-checkbox>
+        <mat-form-field style="margin-left: 15px;">
+          <mat-select #fileMatSelect [(value)]="fileMatchSelection">
+            <mat-option [value]="FileMatch.Matches">matches (case sensitive)</mat-option>
+            <mat-option [value]="FileMatch.MatchesCaseInsensitive">matches (case insensitive)</mat-option>
+            <mat-option [value]="FileMatch.NotMatch">does not match (case sensitive)</mat-option>
+            <mat-option [value]="FileMatch.NotMatchCaseInsensitive">does not match (case insensitive)</mat-option>
+            <mat-option [value]="FileMatch.Contains">contains</mat-option>
+            <mat-option [value]="FileMatch.NotContains">does not contain</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>
