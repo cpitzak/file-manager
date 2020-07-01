@@ -7,6 +7,7 @@ export interface TaskRules {
   videoFiles: boolean;
   fileMatch: {
     checked: boolean;
-    matcher: FileMatch;
+    regex: FileMatch;
+    text: string;
   };
 }

@@ -6,6 +6,7 @@ import { Folder } from '../../core/model/task/folder';
 import { validateSourceFolder } from '../../open-folder/validators/source-folder-validator';
 import { OpenFolderOpts } from '../../open-folder/open-folder.component';
 import { TaskRules } from '../../core/model/task/task-rules';
+import { FileMatch } from '../../core/model/task/file-match.enum';
 
 export enum FormName {
   TaskName = 'taskName',
@@ -54,7 +55,8 @@ export class TaskFormComponent implements OnInit {
     audioFiles: false,
     fileMatch: {
       checked: false,
-      matcher: undefined
+      regex: FileMatch.Matches,
+      text: '',
     },
   }
 

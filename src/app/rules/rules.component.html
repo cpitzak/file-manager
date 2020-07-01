@@ -9,7 +9,8 @@
       <div class="row">
         <mat-checkbox #filenameCheckbox (change)="onCheck($event, fileMatch)">Filename</mat-checkbox>
         <mat-form-field class="file-select">
-          <mat-select #fileMatSelect [(value)]="fileMatchSelection">
+          <mat-select #fileMatSelect [value]="initialSelection"
+          (selectionChange)="onSelectChange($event)">
             <mat-option [value]="FileMatch.Matches">matches (case sensitive)</mat-option>
             <mat-option [value]="FileMatch.MatchesCaseInsensitive">matches (case insensitive)</mat-option>
             <mat-option [value]="FileMatch.NotMatch">does not match (case sensitive)</mat-option>
@@ -20,7 +21,7 @@
         </mat-form-field>
         the following text:
         <mat-form-field class="text-input">
-          <input #textInput matInput placeholder="Enter text">
+          <input #textInput matInput placeholder="Enter text" value="" (keyup)="onTextChange(textInput.value)">
         </mat-form-field>
       </div>
     </mat-card-content>
