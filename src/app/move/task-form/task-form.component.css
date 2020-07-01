@@ -15,16 +15,11 @@
 .close:not(:disabled):not(.disabled) {
   cursor: pointer;
 }
-/* .tab-container {
-  display: block;
-  padding: 0px;
-  margin: 0px;
-} */
 .sub-nav {
   display:flex;
   list-style-type:none;
-  padding:0px;
-  margin: 0px;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 10px 5px;
   justify-content:flex-end;
 }
 .left {

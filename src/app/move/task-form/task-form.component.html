@@ -1,12 +1,10 @@
 <div class="tab-container">
   <ul class="sub-nav">
     <li class="left">
-      <mat-form-field>
-        <input matInput [formControl]="form.controls[FormName.TaskName]" placeholder="Enter Task Name" required>
-      </mat-form-field>
+      <app-task-name-input [formControl]="form.controls[FormName.TaskName]"></app-task-name-input>
     </li>
     <li class="right">
-      <button mat-stroked-button (click)="onNewTask()" color="accent">New</button>
+      <button mat-stroked-button (click)="onNewTask()" color="accent" [disabled]="form.controls[FormName.TaskName].invalid">New</button>
     </li>
     <li class="right">
       <button mat-stroked-button color="accent" (click)="onSave()" [disabled]="form.invalid">Save</button>

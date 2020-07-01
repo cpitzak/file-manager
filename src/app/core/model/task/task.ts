@@ -1,12 +1,12 @@
 import { Folder } from "./folder";
-import { DestinationFolder } from "./destination-folder";
+import { TaskRules } from "./task-rules";
 
 export abstract class Task {
 	name: string;
 	runOnStartup: boolean;
-	srcDirs: Set<Folder>;
-	dstDirs: Set<DestinationFolder>;
-  srcFileRegexes: Set<string>;
+  sourceFolder: Folder;
+  destinationFolder: Folder;
+  rules: TaskRules;
 
   constructor(name: string) {
     this.name = name;

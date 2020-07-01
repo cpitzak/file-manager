@@ -1,0 +1,4 @@
+<mat-form-field>
+  <input matInput [formControl]="ngControl.control" placeholder="Enter Task Name" required>
+  <mat-hint *ngIf="ngControl.hasError('minLength')" align="end" [ngStyle]="{color: 'red'}">Please select a task name</mat-hint>
+</mat-form-field>

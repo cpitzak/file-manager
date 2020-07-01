@@ -8,6 +8,7 @@ import { OpenFolderOpts } from '../../open-folder/open-folder.component';
 import { TaskRules } from '../../core/model/task/task-rules';
 import { FileMatch } from '../../core/model/task/file-match.enum';
 import { validateRules } from '../../rules/validators/rules-validator';
+import { validateTaskNameInput } from '../../task-name-input/validators/task-name-input-validator';
 
 export enum FormName {
   TaskName = 'taskName',
@@ -63,7 +64,7 @@ export class TaskFormComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
     [FormName.TaskName]: new FormControl('',
-    [Validators.required]),
+    [validateTaskNameInput]),
     [FormName.SourceFolder]: new FormControl(this.initialSourceFolder,
       [validateSourceFolder]),
     [FormName.DestinationFolder]: new FormControl(this.initialDestinationFolder,
