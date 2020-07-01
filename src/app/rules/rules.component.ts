@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { MatCheckboxChange, MatCheckbox } from '@angular/material/checkbox';
 import { MatSelect } from '@angular/material/select';
-import { MatInput } from '@angular/material/input';
 
 export enum FileMatch {
   Matches = 'matches',
@@ -10,7 +9,6 @@ export enum FileMatch {
   NotMatchCaseInsensitive = 'in not match',
   Contains = 'contains',
   NotContains = 'notContains',
-
 }
 
 @Component({
