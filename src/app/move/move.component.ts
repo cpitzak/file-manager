@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 
 import { Tab } from './model/tab';
 
 import * as utils from '../core/model/utilities/utils';
+import { MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-move',
@@ -10,6 +11,7 @@ import * as utils from '../core/model/utilities/utils';
   styleUrls: ['./move.component.css']
 })
 export class MoveComponent implements OnInit {
+  @ViewChild('matTabsGroup') matTabsGroup: MatTabGroup;
   tabs: Tab[] = [
     {
       taskName: 'Organize Desktop'
@@ -33,7 +35,7 @@ export class MoveComponent implements OnInit {
       taskName: newTaskName
     }
     this.tabs.push(newTab);
-    this.cdf.detectChanges();
+    this.matTabsGroup.selectedIndex = this.tabs.length - 1;
   }
 
   onRemoveTab(index: number) {
