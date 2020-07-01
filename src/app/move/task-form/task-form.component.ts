@@ -22,7 +22,7 @@ export enum FormName {
   styleUrls: ['./task-form.component.css']
 })
 export class TaskFormComponent implements OnInit {
-  @Output() duplicate = new EventEmitter<string>();
+  @Output() newTask = new EventEmitter<string>();
   @Output() save = new EventEmitter<MoveTask>();
 
   _tab: Tab;
@@ -89,11 +89,11 @@ export class TaskFormComponent implements OnInit {
     });
   }
 
-  onDuplicateTab() {
+  onNewTask() {
     if (this.taskName == null || this.taskName.length === 0) {
       return;
     }
-    this.duplicate.emit(this.taskName);
+    this.newTask.emit(this.taskName);
   }
 
   onSave() {

@@ -38,7 +38,7 @@ export class RulesComponent implements OnInit, AfterViewInit, BaseControlValueAc
 
   ngOnInit(): void {
     const taskRules: TaskRules = this.ngControl.control.value;
-    this.initialSelection = taskRules.fileMatch.regex;
+    this.initialSelection = taskRules?.fileMatch.regex;
   }
 
   public disabled: boolean;

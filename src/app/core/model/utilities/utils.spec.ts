@@ -59,4 +59,16 @@ describe('Utils', () => {
     expect(utils.duplicateName('a copy 3', ['', 'a', 'a copy', 'a copy 2', 'a copy 3'])).toBe('a copy 4');
   });
 
+  it('#newName should add 2', () => {
+    expect(utils.newName('a', ['', 'a'])).toBe('a 2');
+  });
+
+  it('#newName should increment last number', () => {
+    expect(utils.newName('a', ['', 'a', 'a 2'])).toBe('a 3');
+  });
+
+  it('#newName should new add anything', () => {
+    expect(utils.newName('a', [''])).toBe('a');
+  });
+
 });

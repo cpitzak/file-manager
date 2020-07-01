@@ -14,7 +14,7 @@ export class MoveComponent implements OnInit {
   @ViewChild('matTabsGroup') matTabsGroup: MatTabGroup;
   tabs: Tab[] = [
     {
-      taskName: 'Organize Desktop'
+      taskName: 'My New Task'
     }
   ];
   constructor(private cdf: ChangeDetectorRef) { }
@@ -22,7 +22,7 @@ export class MoveComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onDuplicateTab(taskName: string) {
+  onNewTab(taskName: string) {
     if (taskName == null || taskName.trim().length === 0) {
       return;
     }
@@ -30,7 +30,7 @@ export class MoveComponent implements OnInit {
     const existing: string[] = this.tabs.reduce(function(a, c) {
       return a.concat(c.taskName);
     }, []);
-    const newTaskName: string = utils.duplicateName(taskName, existing);
+    const newTaskName: string = utils.newName(taskName, existing);
     const newTab: Tab = {
       taskName: newTaskName
     }

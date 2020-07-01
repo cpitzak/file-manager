@@ -28,6 +28,33 @@ export function duplicateName(name: string, existing: string[]): string {
   return name;
 }
 
+export function newName(name: string, existing: string[]): string {
+  if (
+    name == null ||
+    existing == null ||
+    name.length === 0 ||
+    name.charAt(0) === " " ||
+    name.charAt(name.length - 1) === " "
+  ) {
+    return name;
+  }
+  let found: boolean = existing.findIndex((n: string) => n === name) !== -1
+  if (found) {
+    while (found) {
+      const numMatch = name.match(/(\d+)(?!.*\d)/);
+      if (numMatch) { // ends with num
+        const lastNumMatch = numMatch[0].match(/(\d+)(?!.*\d)/);
+        const lastNum: number = parseInt(lastNumMatch[0], 10);
+        name = name.substring(0, name.indexOf(lastNum+'')) + (lastNum + 1);
+      } else {
+        name += ' 2';
+      }
+      found = existing.findIndex((n: string) => n === name) !== -1
+    }
+  }
+  return name;
+}
+
 export function isLetterOrNumberStr(n: string) {
   if (n == null) {
     return false;
