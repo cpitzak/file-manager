@@ -13,6 +13,8 @@
   <app-open-folder [formControl]="form.controls[FormName.SourceFolder]" [opts]="sourceFolderOpts"></app-open-folder>
   <app-open-folder [formControl]="form.controls[FormName.DestinationFolder]" [opts]="destinationFolderOpts"></app-open-folder>
   <app-rules [formControl]="form.controls[FormName.TaskRules]"></app-rules>
+  <div class="spacer"></div>
+  <app-run-rule class="run-rule"></app-run-rule>
 </div>
 <!-- {{ form.value | json }} -->
 <!-- {{ form.hasError('required') | json }} -->

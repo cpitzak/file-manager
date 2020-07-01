@@ -13,6 +13,7 @@ import { RulesModule } from "../rules/rules.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TaskFormComponent } from './task-form/task-form.component';
 import { TaskNameInputModule } from '../task-name-input/task-name-input.module';
+import { RunRuleModule } from '../run-rule/run-rule.module';
 
 @NgModule({
   declarations: [MoveComponent, TaskFormComponent],
@@ -29,6 +30,7 @@ import { TaskNameInputModule } from '../task-name-input/task-name-input.module';
     ReactiveFormsModule,
     RulesModule,
     TaskNameInputModule,
+    RunRuleModule,
   ],
 })
 export class MoveModule {}

@@ -15,10 +15,12 @@ function createWindow(): BrowserWindow {
   win = new BrowserWindow({
     x: 0,
     y: 0,
-    width: 1202, //size.width,
-    height: 933, // size.height,
-    minWidth: 800,
-    minHeight: 600,
+    // width: 1202, //size.width,
+    // height: 933, // size.height,
+    width: 845, //size.width,
+    height: 850, // size.height,
+    minWidth: 845,
+    minHeight: 850,
     frame: false,
     titleBarStyle: 'hidden',
     webPreferences: {

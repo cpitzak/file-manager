@@ -1,0 +1,17 @@
+.card {
+  margin-top: 5px;
+  margin-right: 15px;
+  border: #919191 solid 1px;
+  background-color: #F4F6F6;
+}
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.btn {
+  width: 100px;
+}
+.checkbox {
+  padding-top: 5px;
+}
