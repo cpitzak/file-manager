@@ -15,6 +15,7 @@ export enum FormName {
   SourceFolder = 'sourceFolder',
   DestinationFolder = 'destinationFolder',
   TaskRules = 'taskRules',
+  OnStartup = 'onStartup',
 }
 
 @Component({
@@ -71,6 +72,7 @@ export class TaskFormComponent implements OnInit {
       [validateSourceFolder]),
     [FormName.TaskRules]: new FormControl(this.initialRules,
       [validateRules]),
+    [FormName.OnStartup]: new FormControl(false)
   });
 
   get taskName(): string {

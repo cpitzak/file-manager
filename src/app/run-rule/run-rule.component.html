@@ -3,9 +3,7 @@
   <mat-card class="card class.mat-elevation-z0">
     <mat-card-content class="content">
       <mat-checkbox class="checkbox" (change)="onCheck($event)">Run on computer startup</mat-checkbox>
-      <button class="btn" mat-stroked-button color="accent">Run now</button>
+      <button class="btn" mat-stroked-button color="accent" (click)="onRun()">Run now</button>
     </mat-card-content>
   </mat-card>
 </div>
-<!-- {{ ngControl.errors | json }}
-{{ ngControl.hasError('unchecked')}} -->
