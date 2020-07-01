@@ -5,8 +5,7 @@ export function validateSourceFolder(formControl: FormControl): ValidationErrors
   const min: number = 1;
   const sourceFolder: Folder = formControl.value;
   const error = {
-    folderError: {
-      given: sourceFolder?.name,
+    minLength: {
       min
     }
   };

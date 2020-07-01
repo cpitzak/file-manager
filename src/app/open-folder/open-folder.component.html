@@ -7,7 +7,7 @@
       <mat-form-field style="width: 100%">
         <input #input matInput [placeholder]="opts.openFolderPlaceholder" readonly="true"
           [formControl]="ngControl.control" [class.is-invalid]="ngControl.invalid" required>
-        <mat-hint *ngIf="ngControl.hasError('required')" align="end" class="required">Please select a folder</mat-hint>
+        <mat-hint *ngIf="ngControl.hasError('minLength')" align="end" [ngStyle]="{color: 'red'}">Please select a folder</mat-hint>
       </mat-form-field>
     </li>
     <li class="right">
@@ -35,3 +35,4 @@
 </div>
 </mat-card-content>
 </mat-card>
+<!-- {{ ngControl.errors | json }} -->

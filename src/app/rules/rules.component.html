@@ -21,9 +21,14 @@
         </mat-form-field>
         the following text:
         <mat-form-field class="text-input">
-          <input #textInput matInput placeholder="Enter text" value="" (keyup)="onTextChange(textInput.value)">
+          <input #textInput matInput placeholder="Enter text" value=""
+          (keyup)="onTextChange(textInput.value)" required>
+          <mat-hint *ngIf="ngControl.hasError('noText')" align="end" [ngStyle]="{color: 'red'}">Please enter the text</mat-hint>
         </mat-form-field>
       </div>
+      <mat-hint *ngIf="ngControl.hasError('unchecked')" align="end" [ngStyle]="{color: 'red'}">Please check at least one</mat-hint>
     </mat-card-content>
   </mat-card>
 </div>
+<!-- {{ ngControl.errors | json }}
+{{ ngControl.hasError('unchecked')}} -->

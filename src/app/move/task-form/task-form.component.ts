@@ -65,11 +65,11 @@ export class TaskFormComponent implements OnInit {
     [FormName.TaskName]: new FormControl('',
     [Validators.required]),
     [FormName.SourceFolder]: new FormControl(this.initialSourceFolder,
-      [Validators.required, validateSourceFolder]),
+      [validateSourceFolder]),
     [FormName.DestinationFolder]: new FormControl(this.initialDestinationFolder,
-      [Validators.required, validateSourceFolder]),
+      [validateSourceFolder]),
     [FormName.TaskRules]: new FormControl(this.initialRules,
-      [Validators.required, validateRules]),
+      [validateRules]),
   });
 
   get taskName(): string {

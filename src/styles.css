@@ -41,3 +41,6 @@ html, body {
 .mat-input-element {
   line-height: normal !important;
 }
+.error {
+  color: red;
+}
