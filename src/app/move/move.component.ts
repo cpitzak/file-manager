@@ -17,11 +17,6 @@ export class MoveComponent implements OnInit {
       taskName: 'Organize Desktop'
     }
   ];
-  showClose: boolean = false;
-  form: FormGroup = new FormGroup({
-    taskName: new FormControl('', [Validators.required]),
-    sourceFolder: new FormControl('', [Validators.required]),
-  })
   constructor(private cdf: ChangeDetectorRef) { }
 
   ngOnInit(): void {

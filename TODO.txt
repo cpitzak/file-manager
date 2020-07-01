@@ -1,0 +1,1 @@
+- handle when source folder and destination folder are the same path
