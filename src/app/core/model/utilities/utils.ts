@@ -34,3 +34,7 @@ export function isLetterOrNumberStr(n: string) {
   }
   return n.match(/^[0-9a-zA-Z]+$/) !== null;
 }
+
+export function propertyOf<T>(name: keyof T) {
+  return name;
+}

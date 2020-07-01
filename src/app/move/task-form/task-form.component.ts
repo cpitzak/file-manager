@@ -5,11 +5,13 @@ import { Tab } from '../model/tab';
 import { Folder } from '../../core/model/task/folder';
 import { validateSourceFolder } from '../../open-folder/validators/source-folder-validator';
 import { OpenFolderOpts } from '../../open-folder/open-folder.component';
+import { TaskRules } from '../../core/model/task/task-rules';
 
 export enum FormName {
   TaskName = 'taskName',
   SourceFolder = 'sourceFolder',
-  DestinationFolder = 'destinationFolder'
+  DestinationFolder = 'destinationFolder',
+  TaskRules = 'taskRules',
 }
 
 @Component({
@@ -33,16 +35,38 @@ export class TaskFormComponent implements OnInit {
     return this._tab;
   }
 
+  // only for initial form load. Use this.form to read and set values for task rules
+  initialSourceFolder: Folder = {
+    name: '',
+    includeSubfolders: false
+  };
+
+  // only for initial form load. Use this.form to read and set values for task rules
+  initialDestinationFolder: Folder = {
+    name: '',
+    putInSubfolder: false
+  };
+
+  initialRules: TaskRules = {
+    imageFiles: false,
+    documentFiles: false,
+    videoFiles: false,
+    audioFiles: false,
+    fileMatch: {
+      checked: false,
+      matcher: undefined
+    },
+  }
+
   form: FormGroup = new FormGroup({
-    [FormName.TaskName]: new FormControl('', [Validators.required]),
-    [FormName.SourceFolder]: new FormControl({
-      name: '',
-      includeSubfolders: false
-    } as Folder, [Validators.required, validateSourceFolder]),
-    [FormName.DestinationFolder]: new FormControl({
-      name: '',
-      putInSubfolder: false
-    } as Folder, [Validators.required, validateSourceFolder]),
+    [FormName.TaskName]: new FormControl('',
+    [Validators.required]),
+    [FormName.SourceFolder]: new FormControl(this.initialSourceFolder,
+      [Validators.required, validateSourceFolder]),
+    [FormName.DestinationFolder]: new FormControl(this.initialDestinationFolder,
+      [Validators.required, validateSourceFolder]),
+    [FormName.TaskRules]: new FormControl(this.initialRules,
+      [Validators.required]),
   });
 
   get taskName(): string {

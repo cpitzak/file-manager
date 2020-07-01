@@ -2,12 +2,12 @@
   <label>Select Rule(s)</label>
   <mat-card class="card class.mat-elevation-z0">
     <mat-card-content class="content">
-      <mat-checkbox>Image files</mat-checkbox>
-      <mat-checkbox>Document files</mat-checkbox>
-      <mat-checkbox>Audio files</mat-checkbox>
-      <mat-checkbox>Video files</mat-checkbox>
+      <mat-checkbox (change)="onCheck($event, imageFiles)">Image files</mat-checkbox>
+      <mat-checkbox (change)="onCheck($event, documentFiles)">Document files</mat-checkbox>
+      <mat-checkbox (change)="onCheck($event, audioFiles)">Audio files</mat-checkbox>
+      <mat-checkbox (change)="onCheck($event, videoFiles)">Video files</mat-checkbox>
       <div class="row">
-        <mat-checkbox #filenameCheckbox (change)="onFilenameCheckboxChange($event)">Filename</mat-checkbox>
+        <mat-checkbox #filenameCheckbox (change)="onCheck($event, fileMatch)">Filename</mat-checkbox>
         <mat-form-field class="file-select">
           <mat-select #fileMatSelect [(value)]="fileMatchSelection">
             <mat-option [value]="FileMatch.Matches">matches (case sensitive)</mat-option>

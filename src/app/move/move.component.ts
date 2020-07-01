@@ -1,10 +1,8 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import { Tab } from './model/tab';
 
 import * as utils from '../core/model/utilities/utils';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatTab, MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-move',

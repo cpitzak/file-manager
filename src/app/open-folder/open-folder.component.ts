@@ -1,5 +1,5 @@
-import { Component, Self, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, AfterContentChecked, Input } from "@angular/core";
-import { NgControl, NG_VALIDATORS, Validator, AbstractControl, ValidationErrors, FormControl } from "@angular/forms";
+import { Component, Self, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, Input } from "@angular/core";
+import { NgControl } from "@angular/forms";
 import { BaseControlValueAccessor } from "../core/model/base-control-value-accessor";
 import { Folder } from "../core/model/task/folder";
 import { MatCheckbox } from "@angular/material/checkbox";
