@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 
 import { Tab } from '../core/model/tab';
 
@@ -18,11 +18,13 @@ export class MoveComponent implements OnInit {
   constructor(private taskManagerService: TaskManagerService, public moveTabService: MoveTabService) { }
 
   ngOnInit(): void {
-    const existingTaskNames: string[] = this.taskManagerService.taskManger.getTaskNames();
-    const taskName: string = fromUtils.newName('My New Task', existingTaskNames);
-    this.moveTabService.tabs.push({
-      taskName
-    });
+    if (this.moveTabService.tabs.length === 0) {
+      const existingTaskNames: string[] = this.taskManagerService.taskManger.getTaskNames();
+      const taskName: string = fromUtils.newName('My New Task', existingTaskNames);
+      this.moveTabService.tabs.push({
+        taskName
+      });
+    }
   }
 
   onNewTab(taskName: string) {
@@ -50,8 +52,8 @@ export class MoveComponent implements OnInit {
 
   onSave(moveTask: MoveTask) {
     this.taskManagerService.taskManger.add(moveTask);
-    // console.log('===');
-    // console.log(this.taskManagerService.taskManger.getTasks());
+    console.log('===');
+    console.log(this.taskManagerService.taskManger.getTasks());
   }
 
 }

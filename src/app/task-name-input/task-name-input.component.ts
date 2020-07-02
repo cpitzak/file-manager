@@ -20,7 +20,6 @@ export class TaskNameInputComponent implements OnInit, OnDestroy, BaseControlVal
    }
 
   ngOnInit(): void {
-    console.log(this.ngControl.control.value);
     this.valuesChanges = this.ngControl.control.valueChanges.subscribe((text: string) => {
       this.validateInput(text);
     })

@@ -123,7 +123,6 @@ export class TaskFormComponent implements OnInit, OnDestroy {
   onOpenedFolder(name: string, formName: FormName) {
     const sourceFolder: Folder = this.form.value[FormName.SourceFolder];
     const destinationFolder: Folder = this.form.value[FormName.DestinationFolder];
-    console.log(sourceFolder.name === destinationFolder.name);
     if (sourceFolder.name.length > 0 && sourceFolder.name === destinationFolder.name) {
       this.openSameFolderNameDialog();
     }

@@ -1,5 +1,5 @@
 <!-- https://stackblitz.com/edit/mat-tabs-closing-example?file=app%2Ftab-group-basic-example.html -->
-<mat-tab-group #matTabsGroup mat-align-tabs="start" animationDuration="0ms">
+<mat-tab-group #matTabsGroup [(selectedIndex)]="moveTabService.selectedIndex" mat-align-tabs="start" animationDuration="0ms">
   <mat-tab #matTabs *ngFor="let tab of moveTabService.tabs; let index = index" [label]="tab.taskName">
     <ng-template *ngIf="moveTabService.tabs.length > 1 && moveTabService.tabs[0].taskName !== tab.taskName" mat-tab-label>
       {{tab.taskName}}

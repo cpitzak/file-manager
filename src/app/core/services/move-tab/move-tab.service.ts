@@ -6,6 +6,7 @@ import { Tab } from '../../model/tab';
   providedIn: 'root'
 })
 export class MoveTabService {
+  selectedIndex: number = 0;
   tabs: Tab[] = [];
   constructor() { }
 }
