@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MoveTask } from '../../core/model/task/move-task';
-import { Tab } from '../model/tab';
+import { Tab } from '../../core/model/tab';
 import { Folder } from '../../core/model/task/folder';
 import { validateSourceFolder } from '../../open-folder/validators/source-folder-validator';
 import { OpenFolderOpts } from '../../open-folder/open-folder.component';

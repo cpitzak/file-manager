@@ -1,7 +1,7 @@
 <!-- https://stackblitz.com/edit/mat-tabs-closing-example?file=app%2Ftab-group-basic-example.html -->
 <mat-tab-group #matTabsGroup mat-align-tabs="start" animationDuration="0ms">
-  <mat-tab #matTabs *ngFor="let tab of tabs; let index = index" [label]="tab.taskName">
-    <ng-template *ngIf="tabs.length > 1 && tabs[0].taskName !== tab.taskName" mat-tab-label>
+  <mat-tab #matTabs *ngFor="let tab of moveTabService.tabs; let index = index" [label]="tab.taskName">
+    <ng-template *ngIf="moveTabService.tabs.length > 1 && moveTabService.tabs[0].taskName !== tab.taskName" mat-tab-label>
       {{tab.taskName}}
       <button class="close" mat-icon-button (click)="onRemoveTab(index)">
         <span aria-hidden="true">×</span>

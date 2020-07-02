@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { BaseControlValueAccessor } from '../core/model/base-control-value-accessor';
 import { TaskManagerService } from '../core/services/task-manager/task-manager.service';
+import { MoveTabService } from '../core/services/move-tab/move-tab.service';
 
 @Component({
   selector: 'app-task-name-input',
@@ -14,7 +15,7 @@ export class TaskNameInputComponent implements OnInit, OnDestroy, BaseControlVal
 
   valuesChanges: Subscription;
 
-  constructor(@Self() public ngControl: NgControl, private taskManagerService: TaskManagerService, private cdr: ChangeDetectorRef) {
+  constructor(@Self() public ngControl: NgControl, private taskManagerService: TaskManagerService, private moveTabService: MoveTabService) {
     this.ngControl.valueAccessor = this;
    }
 
@@ -30,7 +31,18 @@ export class TaskNameInputComponent implements OnInit, OnDestroy, BaseControlVal
   }
 
   validateInput(text: string) {
-    if (this.taskManagerService.taskManger.containsName(text)) {
+    let matchCount = 0;
+    // check if name already exists in a tab
+    for (const tab of this.moveTabService.tabs) {
+      if (tab.taskName === text) {
+        matchCount++;
+      }
+      if (matchCount >= 2) {
+        break;
+      }
+    }
+    // check if name already exists in taskManager service
+    if (matchCount >= 2 || this.taskManagerService.taskManger.containsName(text)) {
       const errors = this.ngControl.control.errors || {};
       errors.duplicateName = true;
       this.ngControl.control.setErrors(errors);
