@@ -2,8 +2,9 @@ import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 
 import { Tab } from './model/tab';
 
-import * as utils from '../core/model/utilities/utils';
+import * as fromUtils from '../core/model/utilities/utils';
 import { MatTabGroup } from '@angular/material/tabs';
+import { TaskManagerService } from '../core/services/task-manager/task-manager.service';
 
 @Component({
   selector: 'app-move',
@@ -12,14 +13,15 @@ import { MatTabGroup } from '@angular/material/tabs';
 })
 export class MoveComponent implements OnInit {
   @ViewChild('matTabsGroup') matTabsGroup: MatTabGroup;
-  tabs: Tab[] = [
-    {
-      taskName: 'My New Task'
-    }
-  ];
-  constructor(private cdf: ChangeDetectorRef) { }
+  tabs: Tab[] = [];
+  constructor(private taskManagerService: TaskManagerService) { }
 
   ngOnInit(): void {
+    const existingTaskNames: string[] = this.taskManagerService.taskManger.getTaskNames();
+    const taskName: string = fromUtils.newName('My New Task', existingTaskNames);
+    this.tabs.push({
+      taskName
+    });
   }
 
   onNewTab(taskName: string) {
@@ -30,7 +32,7 @@ export class MoveComponent implements OnInit {
     const existing: string[] = this.tabs.reduce(function(a, c) {
       return a.concat(c.taskName);
     }, []);
-    const newTaskName: string = utils.newName(taskName, existing);
+    const newTaskName: string = fromUtils.newName(taskName, existing);
     const newTab: Tab = {
       taskName: newTaskName
     }

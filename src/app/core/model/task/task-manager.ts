@@ -5,6 +5,14 @@ export class TaskManager {
 
   run(onStartupOnly: boolean = false) {}
 
+  getTaskNames(): string[] {
+    const names: string[] = [];
+    this.tasks.forEach((task: Task) => {
+      names.push(task.name);
+    });
+    return names;
+  }
+
   add(task: Task): boolean {
     if (task != null) {
       if (this.findIndex(task) === -1) {

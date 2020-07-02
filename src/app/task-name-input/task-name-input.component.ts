@@ -1,4 +1,4 @@
-import { Component, OnInit, Self, OnDestroy } from '@angular/core';
+import { Component, OnInit, Self, OnDestroy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -14,19 +14,27 @@ export class TaskNameInputComponent implements OnInit, OnDestroy, BaseControlVal
 
   valuesChanges: Subscription;
 
-  constructor(@Self() public ngControl: NgControl, private taskManagerService: TaskManagerService) {
+  constructor(@Self() public ngControl: NgControl, private taskManagerService: TaskManagerService, private cdr: ChangeDetectorRef) {
     this.ngControl.valueAccessor = this;
    }
 
   ngOnInit(): void {
+    console.log(this.ngControl.control.value);
     this.valuesChanges = this.ngControl.control.valueChanges.subscribe((text: string) => {
-      // this.taskManagerService.taskManger.contains()
-      console.log(text);
+      this.validateInput(text);
     })
   }
 
   ngOnDestroy(): void {
     this.valuesChanges.unsubscribe();
+  }
+
+  validateInput(text: string) {
+    if (this.taskManagerService.taskManger.containsName(text)) {
+      const errors = this.ngControl.control.errors || {};
+      errors.duplicateName = true;
+      this.ngControl.control.setErrors(errors);
+    }
   }
 
   public disabled: boolean;
