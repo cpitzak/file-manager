@@ -1,9 +1,10 @@
-import { Component, Self, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, Input } from "@angular/core";
+import { Component, Self, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, Input, Output, EventEmitter, OnDestroy } from "@angular/core";
 import { NgControl } from "@angular/forms";
 import { BaseControlValueAccessor } from "../core/model/base-control-value-accessor";
 import { Folder } from "../core/model/task/folder";
 import { MatCheckbox } from "@angular/material/checkbox";
 import { MatSelectChange } from "@angular/material/select";
+import { Subscription } from "rxjs";
 const { shell } = require("electron"); // deconstructing assignment
 const remote = require("electron").remote;
 const app = remote.app;
@@ -24,16 +25,19 @@ export enum FolderFormatOption {
   templateUrl: "./open-folder.component.html",
   styleUrls: ["./open-folder.component.css"],
 })
-export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, AfterViewInit  {
+export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, AfterViewInit, OnDestroy  {
   @ViewChild("checkbox") checkbox: MatCheckbox;
   @ViewChild("checkbox2") checkbox2: MatCheckbox;
   @ViewChild("input") input: ElementRef;
+
+  @Output("opened") opened = new EventEmitter<string>();
   @Input('opts') opts: OpenFolderOpts = {
     openFolderPlaceholder: '',
     showIncludeSubfolder: false,
     showPutInSubfolder: false
   };
 
+  valueChanges: Subscription;
   FolderFormatOption = FolderFormatOption;
   selected = FolderFormatOption.MonthYear;
 
@@ -42,10 +46,18 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
   }
 
   ngAfterViewInit(): void {
+    this.valueChanges = this.ngControl.valueChanges.subscribe(v => {
+      const folder: Folder = this.ngControl.control.value;
+      this.input.nativeElement.value = folder?.name;
+    });
     const folder: Folder = this.ngControl.control.value;
     this.input.nativeElement.value = folder?.name;
     // to avoid error: ExpressionChangedAfterItHasBeenCheckedError
     this.cdf.detectChanges();
+  }
+
+  ngOnDestroy() {
+    this.valueChanges.unsubscribe();
   }
 
   public disabled: boolean;
@@ -72,12 +84,13 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
   }
 
   onOpen() {
+    const currentFolder: Folder = this.ngControl.control.value;
     const desktop: string = app.getPath("desktop");
     const folderStr: string[] | undefined = remote.dialog.showOpenDialogSync({
       defaultPath: desktop,
       properties: ["openDirectory"],
     });
-    const name: string = folderStr?.length > 0 ? folderStr[0] : "";
+    const name: string = folderStr?.length > 0 ? folderStr[0] : currentFolder.name;
     let folder: Folder = {
       name,
     };
@@ -89,7 +102,7 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
       folder.subfolderFormat = this.selected;
     }
     this.ngControl.control.setValue(folder);
-    this.input.nativeElement.value = name;
+    this.opened.emit(name);
   }
 
   onIncludeSubfolders(event: MatCheckbox) {

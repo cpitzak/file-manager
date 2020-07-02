@@ -10,6 +10,9 @@ import { FileMatch } from '../../core/model/task/file-match.enum';
 import { validateRules } from '../../rules/validators/rules-validator';
 import { validateTaskNameInput } from '../../task-name-input/validators/task-name-input-validator';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { GenericDialogComponent } from '../../generic-dialog/generic-dialog.component';
+import { GenericDialogData } from '../../generic-dialog/model/generic-dialog-data';
 
 export enum FormName {
   TaskName = 'taskName',
@@ -85,7 +88,7 @@ export class TaskFormComponent implements OnInit, OnDestroy {
   sourceFolderOpts: OpenFolderOpts = { openFolderPlaceholder: 'Source Folder', showIncludeSubfolder: true };
   destinationFolderOpts: OpenFolderOpts = { openFolderPlaceholder: 'Destination Folder', showPutInSubfolder: true };
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
     // this will change the original that got pasted in so that the Tab will show the changes
@@ -112,6 +115,41 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     const task: MoveTask = new MoveTask(this.taskName);
     this.save.emit(task);
     console.log(this.form.value);
+  }
+
+  onOpenedFolder(name: string, formName: FormName) {
+    const sourceFolder: Folder = this.form.value[FormName.SourceFolder];
+    const destinationFolder: Folder = this.form.value[FormName.DestinationFolder];
+    console.log(sourceFolder.name === destinationFolder.name);
+    if (sourceFolder.name.length > 0 && sourceFolder.name === destinationFolder.name) {
+      this.openSameFolderNameDialog();
+    }
+  }
+
+  openSameFolderNameDialog() {
+    const data: GenericDialogData = {
+      title: 'Warning',
+      acceptButton: {
+        enabled: false,
+      },
+      rejectButton: {
+        enabled: true,
+        focus: true,
+        text: 'Close'
+      },
+      innerHtml: 'Your source folder and destination folder cannot be the same. Please try again.'
+    };
+    const dialogRef = this.dialog.open(GenericDialogComponent, {
+      data
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      const sourceFolder: Folder = this.form.value[FormName.SourceFolder];
+      const destinationFolder: Folder = this.form.value[FormName.DestinationFolder];
+      sourceFolder.name = '';
+      destinationFolder.name = '';
+      this.form.controls[FormName.SourceFolder].setValue(sourceFolder);
+      this.form.controls[FormName.DestinationFolder].setValue(destinationFolder);
+    });
   }
 
 }

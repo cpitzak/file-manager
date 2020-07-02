@@ -14,6 +14,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TaskFormComponent } from './task-form/task-form.component';
 import { TaskNameInputModule } from '../task-name-input/task-name-input.module';
 import { RunRuleModule } from '../run-rule/run-rule.module';
+import { MatDialogModule } from "@angular/material/dialog";
+import { GenericDialogModule } from '../generic-dialog/generic-dialog.module';
 
 @NgModule({
   declarations: [MoveComponent, TaskFormComponent],
@@ -31,6 +33,8 @@ import { RunRuleModule } from '../run-rule/run-rule.module';
     RulesModule,
     TaskNameInputModule,
     RunRuleModule,
+    MatDialogModule,
+    GenericDialogModule,
   ],
 })
 export class MoveModule {}
