@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MoveTask } from '../../core/model/task/move-task';
 import { Tab } from '../model/tab';
@@ -9,6 +9,7 @@ import { TaskRules } from '../../core/model/task/task-rules';
 import { FileMatch } from '../../core/model/task/file-match.enum';
 import { validateRules } from '../../rules/validators/rules-validator';
 import { validateTaskNameInput } from '../../task-name-input/validators/task-name-input-validator';
+import { Subscription } from 'rxjs';
 
 export enum FormName {
   TaskName = 'taskName',
@@ -23,7 +24,7 @@ export enum FormName {
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css']
 })
-export class TaskFormComponent implements OnInit {
+export class TaskFormComponent implements OnInit, OnDestroy {
   @Output() newTask = new EventEmitter<string>();
   @Output() save = new EventEmitter<MoveTask>();
 
@@ -80,6 +81,7 @@ export class TaskFormComponent implements OnInit {
   }
 
   FormName = FormName;
+  valueChanges: Subscription;
   sourceFolderOpts: OpenFolderOpts = { openFolderPlaceholder: 'Source Folder', showIncludeSubfolder: true };
   destinationFolderOpts: OpenFolderOpts = { openFolderPlaceholder: 'Destination Folder', showPutInSubfolder: true };
 
@@ -87,9 +89,13 @@ export class TaskFormComponent implements OnInit {
 
   ngOnInit(): void {
     // this will change the original that got pasted in so that the Tab will show the changes
-    this.form.get(FormName.TaskName).valueChanges.subscribe((name: string) => {
+    this.valueChanges = this.form.get(FormName.TaskName).valueChanges.subscribe((name: string) => {
       this.tab.taskName = name;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.valueChanges.unsubscribe();
   }
 
   onNewTask() {

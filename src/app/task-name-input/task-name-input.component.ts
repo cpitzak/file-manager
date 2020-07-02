@@ -1,19 +1,32 @@
-import { Component, OnInit, Self, ChangeDetectorRef } from '@angular/core';
-import { BaseControlValueAccessor } from '../core/model/base-control-value-accessor';
+import { Component, OnInit, Self, OnDestroy } from '@angular/core';
 import { NgControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
+
+import { BaseControlValueAccessor } from '../core/model/base-control-value-accessor';
+import { TaskManagerService } from '../core/services/task-manager/task-manager.service';
 
 @Component({
   selector: 'app-task-name-input',
   templateUrl: './task-name-input.component.html',
   styleUrls: ['./task-name-input.component.css']
 })
-export class TaskNameInputComponent implements OnInit, BaseControlValueAccessor<string> {
+export class TaskNameInputComponent implements OnInit, OnDestroy, BaseControlValueAccessor<string> {
 
-  constructor(@Self() public ngControl: NgControl, private cdf: ChangeDetectorRef) {
+  valuesChanges: Subscription;
+
+  constructor(@Self() public ngControl: NgControl, private taskManagerService: TaskManagerService) {
     this.ngControl.valueAccessor = this;
    }
 
   ngOnInit(): void {
+    this.valuesChanges = this.ngControl.control.valueChanges.subscribe((text: string) => {
+      // this.taskManagerService.taskManger.contains()
+      console.log(text);
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.valuesChanges.unsubscribe();
   }
 
   public disabled: boolean;
