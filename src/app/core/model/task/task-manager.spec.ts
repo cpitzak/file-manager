@@ -8,8 +8,8 @@ describe('Task Manager', () => {
   beforeEach(() => { taskManager = new TaskManager(); });
 
   it('#add should add only unique tasks', () => {
-    const moveTask: Task = new MoveTask('A');
-    const deleteTask: Task = new DeleteTask('A');
+    const moveTask: Task = new MoveTask('A', null, null, null, null);
+    const deleteTask: Task = new DeleteTask('A', null, null, null);
 
     expect(taskManager.size()).toBe(0);
 
@@ -33,7 +33,7 @@ describe('Task Manager', () => {
     expect(taskManager.size()).toBe(1);
 
     // duplicate should not be added
-    const moveTask2: Task = new MoveTask('B');
+    const moveTask2: Task = new MoveTask('B', null, null, null, null);
     taskManager.add(moveTask2);
     taskManager.add(moveTask2);
     taskManager.add(moveTask2);
@@ -42,7 +42,7 @@ describe('Task Manager', () => {
 
   it('#add should not add duplicate by name, same reference', () => {
     const name: string = 'A';
-    const moveTask1: Task = new MoveTask(name);
+    const moveTask1: Task = new MoveTask(name, null, null, null, null);
     // duplicate should not be added
     taskManager.add(moveTask1);
     taskManager.add(moveTask1);
@@ -51,9 +51,9 @@ describe('Task Manager', () => {
 
   it('#add should not add duplicate by name, different reference', () => {
     const name: string = 'A';
-    const moveTask1: Task = new MoveTask(name);
+    const moveTask1: Task = new MoveTask(name, null, null, null, null);
     // duplicate should not be added
-    const moveTask2: Task = new MoveTask(name);
+    const moveTask2: Task = new MoveTask(name, null, null, null, null);
     taskManager.add(moveTask1);
     taskManager.add(moveTask2);
     taskManager.add(moveTask1);
@@ -63,8 +63,8 @@ describe('Task Manager', () => {
 
   it('#add should add same name different instances but not duplicate add', () => {
     const name: string = 'A';
-    const moveTask: Task = new MoveTask(name);
-    const deleteTask: Task = new DeleteTask(name);
+    const moveTask: Task = new MoveTask(name, null, null, null, null);
+    const deleteTask: Task = new DeleteTask(name, null, null, null);
     taskManager.add(moveTask);
     taskManager.add(moveTask);
     taskManager.add(moveTask);
@@ -75,8 +75,8 @@ describe('Task Manager', () => {
   });
 
   it('#remove should not be true for removing undefined', () => {
-    const moveTask: Task = new MoveTask('A');
-    const deleteTask: Task = new DeleteTask('Ab');
+    const moveTask: Task = new MoveTask('A', null, null, null, null);
+    const deleteTask: Task = new DeleteTask('Ab', null, null, null);
 
     taskManager.add(moveTask);
     taskManager.add(deleteTask);
@@ -87,8 +87,8 @@ describe('Task Manager', () => {
   });
 
   it('#remove should not be true for removing null', () => {
-    const moveTask: Task = new MoveTask('A');
-    const deleteTask: Task = new DeleteTask('Ab');
+    const moveTask: Task = new MoveTask('A', null, null, null, null);
+    const deleteTask: Task = new DeleteTask('Ab', null, null, null);
 
     taskManager.add(moveTask);
     taskManager.add(deleteTask);
@@ -99,8 +99,8 @@ describe('Task Manager', () => {
   });
 
   it('#remove should remove task', () => {
-    const moveTask: Task = new MoveTask('A');
-    const deleteTask: Task = new DeleteTask('Ab');
+    const moveTask: Task = new MoveTask('A', null, null, null, null);
+    const deleteTask: Task = new DeleteTask('Ab', null, null, null);
 
     taskManager.add(moveTask);
     taskManager.add(deleteTask);
@@ -117,8 +117,8 @@ describe('Task Manager', () => {
   });
 
   it('#remove should not remove duplicate task', () => {
-    const moveTask: Task = new MoveTask('A');
-    const deleteTask: Task = new DeleteTask('Ab');
+    const moveTask: Task = new MoveTask('A', null, null, null, null);
+    const deleteTask: Task = new DeleteTask('Ab', null, null, null);
 
     taskManager.add(moveTask);
     taskManager.add(deleteTask);
@@ -143,16 +143,16 @@ describe('Task Manager', () => {
   });
 
   it('#findIndex should not find index of different instance with same name', () => {
-    const moveTask: Task = new MoveTask('A');
-    const deleteTask: Task = new DeleteTask('Ab');
+    const moveTask: Task = new MoveTask('A', null, null, null, null);
+    const deleteTask: Task = new DeleteTask('Ab', null, null, null);
 
     taskManager.add(moveTask);
     expect(taskManager.findIndex(deleteTask)).toBe(-1);
   });
 
   it('#findIndex should find index of task in set with duplicate names different instances', () => {
-    const moveTask: Task = new MoveTask('A');
-    const deleteTask: Task = new DeleteTask('Ab');
+    const moveTask: Task = new MoveTask('A', null, null, null, null);
+    const deleteTask: Task = new DeleteTask('Ab', null, null, null);
 
     taskManager.add(moveTask);
     taskManager.add(deleteTask);

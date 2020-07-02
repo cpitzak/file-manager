@@ -3,6 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TaskNameInputComponent } from './task-name-input.component';
 import { NgControl, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('TaskNameInputComponent', () => {
   let component: TaskNameInputComponent;
@@ -22,7 +25,10 @@ describe('TaskNameInputComponent', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
-        RouterTestingModule
+        RouterTestingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        BrowserAnimationsModule,
       ],
     })
     .overrideComponent(TaskNameInputComponent, {

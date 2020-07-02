@@ -71,4 +71,8 @@ describe('Utils', () => {
     expect(fromUtils.newName('a', [''])).toBe('a');
   });
 
+  it('#newName should be unique on second one', () => {
+    expect(fromUtils.newName('a 2', ['a 2'])).toBe('a 3');
+  });
+
 });

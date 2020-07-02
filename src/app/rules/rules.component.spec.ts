@@ -3,6 +3,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RulesComponent } from './rules.component';
 import { NgControl, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 describe('RulesComponent', () => {
   let component: RulesComponent;
@@ -22,7 +28,13 @@ describe('RulesComponent', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
-        RouterTestingModule
+        RouterTestingModule,
+        MatCardModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        MatCheckboxModule,
       ],
     })
     .overrideComponent(RulesComponent, {

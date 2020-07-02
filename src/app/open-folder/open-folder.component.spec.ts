@@ -3,6 +3,12 @@ import {RouterTestingModule} from "@angular/router/testing";
 
 import { OpenFolderComponent } from './open-folder.component';
 import { FormsModule, ReactiveFormsModule, FormControl, NgControl } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 describe('OpenFolderComponent', () => {
   let component: OpenFolderComponent;
@@ -22,7 +28,13 @@ describe('OpenFolderComponent', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
-        RouterTestingModule
+        RouterTestingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatSelectModule,
+        MatCheckboxModule,
       ],
     })
     .overrideComponent(OpenFolderComponent, {

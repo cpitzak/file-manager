@@ -35,6 +35,7 @@ export class MoveComponent implements OnInit {
     const existing: string[] = this.moveTabService.tabs.reduce(function(a, c) {
       return a.concat(c.taskName);
     }, []);
+    existing.concat(this.taskManagerService.taskManger.getTaskNames());
     const newTaskName: string = fromUtils.newName(taskName, existing);
     const newTab: Tab = {
       taskName: newTaskName
