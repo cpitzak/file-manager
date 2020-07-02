@@ -105,6 +105,7 @@ export class TaskFormComponent implements OnInit {
     }
     const task: MoveTask = new MoveTask(this.taskName);
     this.save.emit(task);
+    console.log(this.form.value);
   }
 
 }
