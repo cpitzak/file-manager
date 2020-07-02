@@ -10,7 +10,5 @@ export class TaskManagerService {
   taskManger: TaskManager = new TaskManager();
 
   constructor() {
-    const moveTask: MoveTask = new MoveTask('My New Task');
-    this.taskManger.add(moveTask);
    }
 }
