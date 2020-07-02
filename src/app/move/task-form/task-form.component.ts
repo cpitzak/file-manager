@@ -112,9 +112,12 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     if (this.form.invalid) {
       return;
     }
-    const task: MoveTask = new MoveTask(this.taskName);
+    const sourceFolder: Folder = this.form.value[FormName.SourceFolder];
+    const destinationFolder: Folder = this.form.value[FormName.DestinationFolder];
+    const taskRules: TaskRules = this.form.value[FormName.TaskRules];
+    const runOnStartup: boolean = this.form.value[FormName.OnStartup];
+    const task: MoveTask = new MoveTask(this.taskName, sourceFolder, destinationFolder, taskRules, runOnStartup);
     this.save.emit(task);
-    console.log(this.form.value);
   }
 
   onOpenedFolder(name: string, formName: FormName) {

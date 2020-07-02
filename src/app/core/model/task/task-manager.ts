@@ -13,6 +13,14 @@ export class TaskManager {
     return names;
   }
 
+  getTasks(): Task[] {
+    const t: Task[] = [];
+    this.tasks.forEach((task: Task) => {
+      t.push(task.newInstance());
+    });
+    return t;
+  }
+
   add(task: Task): boolean {
     if (task != null) {
       if (this.findIndex(task) === -1) {

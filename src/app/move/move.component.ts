@@ -6,6 +6,7 @@ import * as fromUtils from '../core/model/utilities/utils';
 import { MatTabGroup } from '@angular/material/tabs';
 import { TaskManagerService } from '../core/services/task-manager/task-manager.service';
 import { MoveTabService } from '../core/services/move-tab/move-tab.service';
+import { MoveTask } from '../core/model/task/move-task';
 
 @Component({
   selector: 'app-move',
@@ -47,11 +48,10 @@ export class MoveComponent implements OnInit {
     this.moveTabService.tabs.splice(index, 1);
   }
 
-  onSave(tab: Tab) {
-    if (tab == null) {
-      return;
-    }
-    tab.taskName = tab.taskName.trim();
+  onSave(moveTask: MoveTask) {
+    this.taskManagerService.taskManger.add(moveTask);
+    // console.log('===');
+    // console.log(this.taskManagerService.taskManger.getTasks());
   }
 
 }
