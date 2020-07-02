@@ -27,14 +27,22 @@ export class TaskManager {
   }
 
   contains(task: Task): boolean {
-    return this.findIndex(task) !== -1;
+    return this.containsName(task?.name);
+  }
+
+  containsName(name: string): boolean {
+    return this.findIndexByName(name) !== -1;
   }
 
   findIndex(task: Task): number {
-    if (task != null) {
+    return this.findIndexByName(task?.name);
+  }
+
+  findIndexByName(name: string): number {
+    if (name != null) {
       for (let i = 0; i < this.tasks.length; i++) {
         const t: Task = this.tasks[i];
-        if (t.constructor === task.constructor && t.name === task.name) {
+        if (t.name === name) {
           return i;
         }
       }
