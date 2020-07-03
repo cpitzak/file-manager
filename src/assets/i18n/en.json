@@ -18,5 +18,23 @@
       "TITLE": "When to Run",
       "ON_START_CHECKBOX_LABEL": "Run on computer startup",
       "RUN_NOW_BUTTON": "Run now"
+    },
+    "RULES": {
+      "TITLE": "What Type(s) of Files",
+      "CHECK_BOXES": {
+        "IMAGE_FILES": "Image files",
+        "DOCUMENT_FILES": "Document files",
+        "AUDIO_FILES": "Audio files",
+        "VIDEO_FILES": "Video files",
+        "FILENAME": "File Name"
+      },
+      "SELECT_OPTIONS": {
+        "MATCH_SENSTIVE": "matches (case sensitive)",
+        "MATCH_INSENSTIVE": "matches (case insensitive)",
+        "DOES_NOT_MATCH_SENSTIVE": "does not match (case sensitive)",
+        "DOES_NOT_MATCH_INSENSTIVE": "does not match (case insensitive)",
+        "CONTAINS": "contains",
+        "DOES_NOT_CONTAIN": "does not contain"
+      }
     }
 }

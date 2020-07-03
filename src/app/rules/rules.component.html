@@ -1,16 +1,25 @@
 <div>
-  <label>What Type(s) of Files</label>
+  <label>{{ 'RULES.TITLE' | translate }}</label>
   <mat-card class="card class.mat-elevation-z0">
     <mat-card-content class="content">
-      <mat-checkbox (change)="onCheck($event, imageFiles)">Image files</mat-checkbox>
-      <mat-checkbox (change)="onCheck($event, documentFiles)">Document files</mat-checkbox>
-      <mat-checkbox (change)="onCheck($event, audioFiles)">Audio files</mat-checkbox>
-      <mat-checkbox (change)="onCheck($event, videoFiles)">Video files</mat-checkbox>
+      <mat-checkbox (change)="onCheck($event, imageFiles)">
+        {{ 'RULES.CHECK_BOXES.IMAGE_FILES' | translate }}
+      </mat-checkbox>
+      <mat-checkbox (change)="onCheck($event, documentFiles)">
+        {{ 'RULES.CHECK_BOXES.DOCUMENT_FILES' | translate }}
+      </mat-checkbox>
+      <mat-checkbox (change)="onCheck($event, audioFiles)">
+        {{ 'RULES.CHECK_BOXES.AUDIO_FILES' | translate }}
+      </mat-checkbox>
+      <mat-checkbox (change)="onCheck($event, videoFiles)">
+        {{ 'RULES.CHECK_BOXES.VIDEO_FILES' | translate }}
+      </mat-checkbox>
       <div class="row">
-        <mat-checkbox #filenameCheckbox (change)="onCheck($event, fileMatch)">Filename</mat-checkbox>
+        <mat-checkbox #filenameCheckbox (change)="onCheck($event, fileMatch)">
+          {{ 'RULES.CHECK_BOXES.FILENAME' | translate }}
+        </mat-checkbox>
         <mat-form-field class="file-select">
-          <mat-select #fileMatSelect [value]="initialSelection"
-          (selectionChange)="onSelectChange($event)">
+          <mat-select #fileMatSelect [value]="initialSelection" (selectionChange)="onSelectChange($event)">
             <mat-option [value]="FileMatch.Matches">matches (case sensitive)</mat-option>
             <mat-option [value]="FileMatch.MatchesCaseInsensitive">matches (case insensitive)</mat-option>
             <mat-option [value]="FileMatch.NotMatch">does not match (case sensitive)</mat-option>
@@ -21,12 +30,13 @@
         </mat-form-field>
         the following text:
         <mat-form-field class="text-input">
-          <input #textInput matInput placeholder="Enter text" value=""
-          (keyup)="onTextChange(textInput.value)" required>
-          <mat-hint *ngIf="ngControl.hasError('noText')" align="end" [ngStyle]="{color: 'red'}">Please enter the text</mat-hint>
+          <input #textInput matInput placeholder="Enter text" value="" (keyup)="onTextChange(textInput.value)" required>
+          <mat-hint *ngIf="ngControl.hasError('noText')" align="end" [ngStyle]="{color: 'red'}">Please enter the text
+          </mat-hint>
         </mat-form-field>
       </div>
-      <mat-hint *ngIf="ngControl.hasError('unchecked')" align="end" [ngStyle]="{color: 'red'}">Please check at least one</mat-hint>
+      <mat-hint *ngIf="ngControl.hasError('unchecked')" align="end" [ngStyle]="{color: 'red'}">Please check at least one
+      </mat-hint>
     </mat-card-content>
   </mat-card>
 </div>
