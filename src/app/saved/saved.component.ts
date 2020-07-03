@@ -1,4 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskManagerService } from '../core/services/task-manager/task-manager.service';
+import { Task } from '../core/model/task/task';
+import { MoveTask } from '../core/model/task/move-task';
+import { DeleteTask } from '../core/model/task/delete-task';
+
+export enum TableColumnLabels {
+  Name = 'Task Name',
+  TaskType = 'Task Type',
+  RunOnStartup = 'Run on Startup',
+  Actions = 'Actions'
+}
 
 @Component({
   selector: 'app-saved',
@@ -7,9 +18,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SavedComponent implements OnInit {
 
-  constructor() { }
+  TableColumnLabels = TableColumnLabels;
+  displayedColumns: string[] = [TableColumnLabels.Name, TableColumnLabels.TaskType,
+    TableColumnLabels.RunOnStartup, TableColumnLabels.Actions];
+  dataSource: Task[];
+
+  constructor(public taskManagerService: TaskManagerService) { }
 
   ngOnInit(): void {
+    this.dataSource = this.taskManagerService.taskManger.getTasks();
+  }
+
+  getType(task: Task): string {
+    let result = '';
+    if (task instanceof MoveTask) {
+      result = 'Move';
+    } else if (task instanceof DeleteTask) {
+      result = 'Delete';
+    }
+    return result;
   }
 
 }
