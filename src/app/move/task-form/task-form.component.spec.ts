@@ -9,6 +9,7 @@ import { OpenFolderModule } from '../../open-folder/open-folder.module';
 import { TaskNameInputModule } from '../../task-name-input/task-name-input.module';
 import { RulesModule } from '../../rules/rules.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('TaskFormComponent', () => {
   let component: TaskFormComponent;
@@ -35,6 +36,7 @@ describe('TaskFormComponent', () => {
         TaskNameInputModule,
         RulesModule,
         BrowserAnimationsModule,
+        TranslateModule.forRoot()
       ],
     })
     .overrideComponent(TaskFormComponent, {

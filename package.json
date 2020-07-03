@@ -97,6 +97,7 @@
     "node": ">=10.13.0"
   },
   "dependencies": {
+    "@angular/localize": "9.1.11",
     "custom-electron-titlebar": "3.2.2-hotfix62"
   }
 }

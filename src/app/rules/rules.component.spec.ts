@@ -9,6 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SharedModule } from '../shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('RulesComponent', () => {
   let component: RulesComponent;
@@ -35,6 +37,8 @@ describe('RulesComponent', () => {
         MatInputModule,
         BrowserAnimationsModule,
         MatCheckboxModule,
+        SharedModule,
+        TranslateModule.forRoot()
       ],
     })
     .overrideComponent(RulesComponent, {

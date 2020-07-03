@@ -18,6 +18,7 @@ import { GenericDialogModule } from '../generic-dialog/generic-dialog.module';
 import { MoveRoutingModule } from './move-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TaskFormComponent } from './task-form/task-form.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('MoveComponent', () => {
   let component: MoveComponent;
@@ -40,7 +41,8 @@ describe('MoveComponent', () => {
         RunRuleModule,
         MatDialogModule,
         GenericDialogModule,
-        BrowserAnimationsModule, ],
+        BrowserAnimationsModule,
+        TranslateModule.forRoot() ],
       declarations: [ MoveComponent, TaskFormComponent ]
     })
     .compileComponents();

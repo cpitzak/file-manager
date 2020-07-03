@@ -6,6 +6,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from '../shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('RunRuleComponent', () => {
   let component: RunRuleComponent;
@@ -29,6 +31,8 @@ describe('RunRuleComponent', () => {
         MatCheckboxModule,
         MatCardModule,
         BrowserAnimationsModule,
+        SharedModule,
+        TranslateModule.forRoot()
       ],
     })
     .overrideComponent(RunRuleComponent, {

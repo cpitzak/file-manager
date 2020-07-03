@@ -6,6 +6,7 @@ import { SideMenuComponent } from "./side-menu.component";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
+import { SharedModule } from "../shared/shared.module";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -40,6 +41,7 @@ describe("SideMenuComponent", () => {
       imports: [
         RouterTestingModule,
         HttpClientModule,
+        SharedModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
