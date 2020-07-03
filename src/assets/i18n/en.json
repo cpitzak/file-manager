@@ -1,18 +1,22 @@
 {
-  "PAGES": {
-      "HOME": {
-          "TITLE": "App works !",
-          "GO_TO_DETAIL": "Go to Detail"
-      },
-      "DETAIL": {
-        "TITLE": "Detail page !",
-        "BACK_TO_HOME": "Back to Home"
-    },
-    "SIDE_MENU": {
+  "SIDE_MENU": {
       "MOVE": "Move Files",
       "DELETE": "Delete Files",
       "SAVED": "Saved Tasks",
       "LOG": "Task Logs"
+    },
+    "TASK_NAME_INPUT": {
+      "INPUT": {
+        "PLACE_HOLDER": "Enter Task Name"
+      },
+      "MAT_HINT": {
+        "MIN_LENGTH_ERROR_MSG": "Please enter a task name",
+        "DUPLICATE_NAME_ERROR_MSG": "Task name already exists"
+      }
+    },
+    "RUN_RULE": {
+      "TITLE": "When to Run",
+      "ON_START_CHECKBOX_LABEL": "Run on computer startup",
+      "RUN_NOW_BUTTON": "Run now"
     }
-  }
 }

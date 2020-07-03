@@ -1,9 +1,13 @@
 <div>
-  <label>When to Run</label>
+  <label>{{ 'RUN_RULE.TITLE' | translate }}</label>
   <mat-card class="card class.mat-elevation-z0">
     <mat-card-content class="content">
-      <mat-checkbox class="checkbox" (change)="onCheck($event)">Run on computer startup</mat-checkbox>
-      <button class="btn" mat-stroked-button color="accent" (click)="onRun()">Run now</button>
+      <mat-checkbox class="checkbox" (change)="onCheck($event)">
+        {{ 'RUN_RULE.ON_START_CHECKBOX_LABEL' | translate }}
+      </mat-checkbox>
+      <button class="btn" mat-stroked-button color="accent" (click)="onRun()">
+        {{ 'RUN_RULE.RUN_NOW_BUTTON' | translate }}
+      </button>
     </mat-card-content>
   </mat-card>
 </div>

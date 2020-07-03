@@ -1,5 +1,10 @@
 <mat-form-field>
-  <input matInput [formControl]="ngControl.control" placeholder="Enter Task Name" required>
-  <mat-hint *ngIf="ngControl.hasError('minLength')" align="end" [ngStyle]="{color: 'red'}">Please select a task name</mat-hint>
-  <mat-hint *ngIf="ngControl.hasError('duplicateName')" align="end" [ngStyle]="{color: 'red'}">Task name already exists</mat-hint>
+  <input matInput [formControl]="ngControl.control" placeholder="{{ 'TASK_NAME_INPUT.INPUT.PLACE_HOLDER' | translate }}" required>
+  <mat-hint *ngIf="ngControl.hasError('minLength')" align="end" [ngStyle]="{color: 'red'}">
+    {{ 'TASK_NAME_INPUT.MAT_HINT.MIN_LENGTH_ERROR_MSG' | translate }}
+  </mat-hint>
+  <mat-hint *ngIf="ngControl.hasError('duplicateName')" align="end" [ngStyle]="{color: 'red'}">
+    {{ 'TASK_NAME_INPUT.MAT_HINT.DUPLICATE_NAME_ERROR_MSG' | translate }}
+  </mat-hint>
 </mat-form-field>
+

@@ -4,6 +4,7 @@ import { RunRuleComponent } from './run-rule.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -14,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatCheckboxModule,
     MatButtonModule,
+    SharedModule,
   ],
   exports: [RunRuleComponent]
 })
