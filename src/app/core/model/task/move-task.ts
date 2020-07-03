@@ -7,5 +7,9 @@ export class MoveTask extends Task {
     super(name, sourceFolder, destinationFolder, rules, runOnStartup);
   }
 
+  newInstance(): Task {
+    return new MoveTask(this.name, this.sourceFolder, this.destinationFolder, this.rules, this.runOnStartup);
+  }
+
   run() {}
 }

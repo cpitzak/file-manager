@@ -18,8 +18,6 @@ export abstract class Task {
   }
 
   abstract run(): void;
-  newInstance(): Task {
-    return this.constructor(this.name, this.sourceFolder, this.destinationFolder, this.rules, this.runOnStartup);
-  }
+  abstract newInstance(): Task;
 
 }
