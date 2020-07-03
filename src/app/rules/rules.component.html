@@ -28,14 +28,17 @@
             <mat-option [value]="FileMatch.NotContains">does not contain</mat-option>
           </mat-select>
         </mat-form-field>
-        the following text:
+        t{{ 'RULES.FILENAME_LABEL_END' | translate }}
         <mat-form-field class="text-input">
-          <input #textInput matInput placeholder="Enter text" value="" (keyup)="onTextChange(textInput.value)" required>
-          <mat-hint *ngIf="ngControl.hasError('noText')" align="end" [ngStyle]="{color: 'red'}">Please enter the text
+          <input #textInput matInput placeholder="{{ 'RULES.INPUT.PLACE_HOLDER' | translate }}"
+          value="" (keyup)="onTextChange(textInput.value)" required>
+          <mat-hint *ngIf="ngControl.hasError('noText')" align="end" [ngStyle]="{color: 'red'}">
+            {{ 'RULES.INPUT.NO_TEXT_ERROR' | translate }}
           </mat-hint>
         </mat-form-field>
       </div>
-      <mat-hint *ngIf="ngControl.hasError('unchecked')" align="end" [ngStyle]="{color: 'red'}">Please check at least one
+      <mat-hint *ngIf="ngControl.hasError('unchecked')" align="end" [ngStyle]="{color: 'red'}">
+        {{ 'RULES.CHECK_BOXES.ERROR_MSG' | translate }}
       </mat-hint>
     </mat-card-content>
   </mat-card>

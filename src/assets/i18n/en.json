@@ -26,7 +26,13 @@
         "DOCUMENT_FILES": "Document files",
         "AUDIO_FILES": "Audio files",
         "VIDEO_FILES": "Video files",
-        "FILENAME": "File Name"
+        "FILENAME": "File Name",
+        "ERROR_MSG": "Please check at least one"
+      },
+      "FILENAME_LABEL_END": "the following text:",
+      "INPUT": {
+        "PLACE_HOLDER": "Enter text",
+        "NO_TEXT_ERROR": "Please enter the text"
       },
       "SELECT_OPTIONS": {
         "MATCH_SENSTIVE": "matches (case sensitive)",

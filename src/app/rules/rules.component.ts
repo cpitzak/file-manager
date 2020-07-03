@@ -6,6 +6,7 @@ import { BaseControlValueAccessor } from '../core/model/base-control-value-acces
 import { TaskRules } from '../core/model/task/task-rules';
 import { NgControl } from '@angular/forms';
 import * as fromUtils from '../core/model/utilities/utils';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -25,20 +26,22 @@ export class RulesComponent implements OnInit, AfterViewInit, BaseControlValueAc
   videoFiles: string = fromUtils.propertyOf<TaskRules>("videoFiles");
   fileMatch: string = fromUtils.propertyOf<TaskRules>("fileMatch");
   initialSelection: FileMatch;
+  v2: string;
 
-  constructor(@Self() public ngControl: NgControl, private cdf: ChangeDetectorRef) {
+  constructor(@Self() public ngControl: NgControl, private cdf: ChangeDetectorRef, private tanslateService: TranslateService) {
     this.ngControl.valueAccessor = this;
+  }
+
+  ngOnInit(): void {
+    const taskRules: TaskRules = this.ngControl.control.value;
+    this.initialSelection = taskRules?.fileMatch.regex;
+    // this.tanslateService.get('RULES.CHECK_BOXES.FILENAME').subscribe((text: string) => { this.v2 = text });
   }
 
   ngAfterViewInit(): void {
     this.fileMatSelect.disabled = !this.filenameCheckbox.checked;
     this.textInput.nativeElement.disabled = !this.filenameCheckbox.checked;
     this.cdf.detectChanges();
-  }
-
-  ngOnInit(): void {
-    const taskRules: TaskRules = this.ngControl.control.value;
-    this.initialSelection = taskRules?.fileMatch.regex;
   }
 
   public disabled: boolean;
