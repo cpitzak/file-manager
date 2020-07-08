@@ -9,6 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SharedModule } from '../shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('OpenFolderComponent', () => {
   let component: OpenFolderComponent;
@@ -35,6 +37,8 @@ describe('OpenFolderComponent', () => {
         MatCardModule,
         MatSelectModule,
         MatCheckboxModule,
+        SharedModule,
+        TranslateModule.forRoot()
       ],
     })
     .overrideComponent(OpenFolderComponent, {

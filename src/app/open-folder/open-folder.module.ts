@@ -8,6 +8,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { MatSelectModule } from "@angular/material/select";
 import { MatCardModule } from "@angular/material/card";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [OpenFolderComponent],
@@ -21,6 +22,7 @@ import { MatCardModule } from "@angular/material/card";
     ReactiveFormsModule,
     MatSelectModule,
     MatCardModule,
+    SharedModule,
   ],
   exports: [OpenFolderComponent],
 })

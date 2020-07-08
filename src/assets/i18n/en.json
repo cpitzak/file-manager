@@ -42,5 +42,15 @@
         "CONTAINS": "contains",
         "DOES_NOT_CONTAIN": "does not contain"
       }
+    },
+    "OPEN_FOLDER": {
+      "MIN_LENGTH_ERROR_MSG": "Please select a folder",
+      "INCLUDE_SUBFOLDER_CHECKBOX": "Include subfolders",
+      "SUBFOLDER_FORMAT_LABEL": "Put in subfolder with format: ",
+      "SUBFOLDER_FORMATS": {
+        "MONTH_YEAR": "month-year",
+        "YEAR_MONTH": "year-month",
+        "DAY_MONTH_YEAR": "day-month-year"
+      }
     }
 }
