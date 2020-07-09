@@ -14,7 +14,7 @@
     </li>
     <li class="right">
       <!-- open button -->
-      <button class="btn" mat-stroked-button (click)="onOpen()" color="accent">Open</button>
+      <button class="btn" mat-stroked-button (click)="onOpen()" color="accent">{{ 'OPEN_FOLDER.OPEN_BUTTON' | translate }}</button>
     </li>
   </ul>
   <div class="break"></div>
@@ -29,9 +29,9 @@
     (change)="onPutInSubfolder($event)">{{ 'OPEN_FOLDER.SUBFOLDER_FORMAT_LABEL' | translate }}</mat-checkbox>
     <mat-form-field style="margin-left: 15px;">
      <mat-select [(value)]="selected" [disabled]="!ngControl.control.value.putInSubfolder" (selectionChange)="onSelectionChange($event)">
-       <mat-option [value]="FolderFormatOption.MonthYear">month-year</mat-option>
-       <mat-option [value]="FolderFormatOption.MonthYear">year-month</mat-option>
-       <mat-option [value]="FolderFormatOption.DayMonthYear">day-month-year</mat-option>
+       <mat-option [value]="FolderFormatOption.MonthYear">{{ 'OPEN_FOLDER.SUBFOLDER_FORMATS.MONTH_YEAR' | translate }}</mat-option>
+       <mat-option [value]="FolderFormatOption.MonthYear">{{ 'OPEN_FOLDER.SUBFOLDER_FORMATS.YEAR_MONTH' | translate }}</mat-option>
+       <mat-option [value]="FolderFormatOption.DayMonthYear">{{ 'OPEN_FOLDER.SUBFOLDER_FORMATS.DAY_MONTH_YEAR' | translate }}</mat-option>
      </mat-select>
    </mat-form-field>
    </ng-container>

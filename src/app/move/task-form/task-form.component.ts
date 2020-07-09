@@ -1,31 +1,32 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MoveTask } from '../../core/model/task/move-task';
-import { Tab } from '../../core/model/tab';
-import { Folder } from '../../core/model/task/folder';
-import { validateSourceFolder } from '../../open-folder/validators/source-folder-validator';
-import { OpenFolderOpts } from '../../open-folder/open-folder.component';
-import { TaskRules } from '../../core/model/task/task-rules';
-import { FileMatch } from '../../core/model/task/file-match.enum';
-import { validateRules } from '../../rules/validators/rules-validator';
-import { validateTaskNameInput } from '../../task-name-input/validators/task-name-input-validator';
-import { Subscription } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { GenericDialogComponent } from '../../generic-dialog/generic-dialog.component';
-import { GenericDialogData } from '../../generic-dialog/model/generic-dialog-data';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { MoveTask } from "../../core/model/task/move-task";
+import { Tab } from "../../core/model/tab";
+import { Folder } from "../../core/model/task/folder";
+import { validateSourceFolder } from "../../open-folder/validators/source-folder-validator";
+import { OpenFolderOpts } from "../../open-folder/open-folder.component";
+import { TaskRules } from "../../core/model/task/task-rules";
+import { FileMatch } from "../../core/model/task/file-match.enum";
+import { validateRules } from "../../rules/validators/rules-validator";
+import { validateTaskNameInput } from "../../task-name-input/validators/task-name-input-validator";
+import { Subscription } from "rxjs";
+import { MatDialog } from "@angular/material/dialog";
+import { GenericDialogComponent } from "../../generic-dialog/generic-dialog.component";
+import { GenericDialogData } from "../../generic-dialog/model/generic-dialog-data";
+import { TranslateService } from "@ngx-translate/core";
 
 export enum FormName {
-  TaskName = 'taskName',
-  SourceFolder = 'sourceFolder',
-  DestinationFolder = 'destinationFolder',
-  TaskRules = 'taskRules',
-  OnStartup = 'onStartup',
+  TaskName = "taskName",
+  SourceFolder = "sourceFolder",
+  DestinationFolder = "destinationFolder",
+  TaskRules = "taskRules",
+  OnStartup = "onStartup",
 }
 
 @Component({
-  selector: 'app-task-form',
-  templateUrl: './task-form.component.html',
-  styleUrls: ['./task-form.component.css']
+  selector: "app-task-form",
+  templateUrl: "./task-form.component.html",
+  styleUrls: ["./task-form.component.css"],
 })
 export class TaskFormComponent implements OnInit, OnDestroy {
   @Output() newTask = new EventEmitter<string>();
@@ -45,14 +46,14 @@ export class TaskFormComponent implements OnInit, OnDestroy {
 
   // only for initial form load. Use this.form to read and set values for task rules
   initialSourceFolder: Folder = {
-    name: '',
-    includeSubfolders: false
+    name: "",
+    includeSubfolders: false,
   };
 
   // only for initial form load. Use this.form to read and set values for task rules
   initialDestinationFolder: Folder = {
-    name: '',
-    putInSubfolder: false
+    name: "",
+    putInSubfolder: false,
   };
 
   initialRules: TaskRules = {
@@ -63,20 +64,16 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     fileMatch: {
       checked: false,
       regex: FileMatch.Matches,
-      text: '',
+      text: "",
     },
-  }
+  };
 
   form: FormGroup = new FormGroup({
-    [FormName.TaskName]: new FormControl('',
-    [validateTaskNameInput]),
-    [FormName.SourceFolder]: new FormControl(this.initialSourceFolder,
-      [validateSourceFolder]),
-    [FormName.DestinationFolder]: new FormControl(this.initialDestinationFolder,
-      [validateSourceFolder]),
-    [FormName.TaskRules]: new FormControl(this.initialRules,
-      [validateRules]),
-    [FormName.OnStartup]: new FormControl(false)
+    [FormName.TaskName]: new FormControl("", [validateTaskNameInput]),
+    [FormName.SourceFolder]: new FormControl(this.initialSourceFolder, [validateSourceFolder]),
+    [FormName.DestinationFolder]: new FormControl(this.initialDestinationFolder, [validateSourceFolder]),
+    [FormName.TaskRules]: new FormControl(this.initialRules, [validateRules]),
+    [FormName.OnStartup]: new FormControl(false),
   });
 
   get taskName(): string {
@@ -85,12 +82,21 @@ export class TaskFormComponent implements OnInit, OnDestroy {
 
   FormName = FormName;
   valueChanges: Subscription;
-  sourceFolderOpts: OpenFolderOpts = { openFolderPlaceholder: 'Source Folder', showIncludeSubfolder: true };
-  destinationFolderOpts: OpenFolderOpts = { openFolderPlaceholder: 'Destination Folder', showPutInSubfolder: true };
+  sourceFolderOpts: OpenFolderOpts;
+  destinationFolderOpts: OpenFolderOpts;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private tanslateService: TranslateService) {
+  }
 
   ngOnInit(): void {
+    this.sourceFolderOpts = {
+      openFolderPlaceholder: this.tanslateService.instant("MOVE.TASK_FORM.SOURCE_FOLDER"),
+      showIncludeSubfolder: true,
+    };
+    this.destinationFolderOpts = {
+      openFolderPlaceholder: this.tanslateService.instant("MOVE.TASK_FORM.DESTINATION_FOLDER"),
+      showPutInSubfolder: true,
+    };
     // this will change the original that got pasted in so that the Tab will show the changes
     this.valueChanges = this.form.get(FormName.TaskName).valueChanges.subscribe((name: string) => {
       this.tab.taskName = name;
@@ -130,28 +136,27 @@ export class TaskFormComponent implements OnInit, OnDestroy {
 
   openSameFolderNameDialog() {
     const data: GenericDialogData = {
-      title: 'Warning',
+      title: "Warning",
       acceptButton: {
         enabled: false,
       },
       rejectButton: {
         enabled: true,
         focus: true,
-        text: 'Close'
+        text: "Close",
       },
-      innerHtml: 'Your source folder and destination folder cannot be the same. Please try again.'
+      innerHtml: "Your source folder and destination folder cannot be the same. Please try again.",
     };
     const dialogRef = this.dialog.open(GenericDialogComponent, {
-      data
+      data,
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       const sourceFolder: Folder = this.form.value[FormName.SourceFolder];
       const destinationFolder: Folder = this.form.value[FormName.DestinationFolder];
-      sourceFolder.name = '';
-      destinationFolder.name = '';
+      sourceFolder.name = "";
+      destinationFolder.name = "";
       this.form.controls[FormName.SourceFolder].setValue(sourceFolder);
       this.form.controls[FormName.DestinationFolder].setValue(destinationFolder);
     });
   }
-
 }

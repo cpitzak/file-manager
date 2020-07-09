@@ -44,6 +44,7 @@
       }
     },
     "OPEN_FOLDER": {
+      "OPEN_BUTTON": "Open",
       "MIN_LENGTH_ERROR_MSG": "Please select a folder",
       "INCLUDE_SUBFOLDER_CHECKBOX": "Include subfolders",
       "SUBFOLDER_FORMAT_LABEL": "Put in subfolder with format: ",
@@ -51,6 +52,14 @@
         "MONTH_YEAR": "month-year",
         "YEAR_MONTH": "year-month",
         "DAY_MONTH_YEAR": "day-month-year"
+      }
+    },
+    "MOVE": {
+      "TASK_FORM": {
+        "SAVE_BUTTON": "Save",
+        "NEW_BUTTON": "New",
+        "SOURCE_FOLDER": "Source Folder",
+        "DESTINATION_FOLDER": "Destination Folder"
       }
     }
 }

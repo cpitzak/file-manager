@@ -5,10 +5,14 @@
     </li>
     <li class="right">
       <button mat-stroked-button (click)="onNewTask()" color="accent"
-        [disabled]="form.controls[FormName.TaskName].invalid">New</button>
+        [disabled]="form.controls[FormName.TaskName].invalid">
+        {{ 'MOVE.TASK_FORM.NEW_BUTTON' | translate }}
+      </button>
     </li>
     <li class="right">
-      <button mat-stroked-button color="accent" (click)="onSave()" [disabled]="form.invalid">Save</button>
+      <button mat-stroked-button color="accent" (click)="onSave()" [disabled]="form.invalid">
+        {{ 'MOVE.TASK_FORM.SAVE_BUTTON' | translate }}
+      </button>
     </li>
   </ul>
   <app-open-folder (opened)="onOpenedFolder($event, FormName.SourceFolder)"
