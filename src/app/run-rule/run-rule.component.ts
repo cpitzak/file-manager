@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Self, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Self } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { BaseControlValueAccessor } from "../core/model/base-control-value-accessor";
 import { NgControl } from '@angular/forms';
@@ -11,7 +11,7 @@ import { NgControl } from '@angular/forms';
 export class RunRuleComponent implements OnInit, BaseControlValueAccessor<boolean> {
   @Output() run = new EventEmitter<void>();
 
-  constructor(@Self() public ngControl: NgControl, private cdf: ChangeDetectorRef) {
+  constructor(@Self() public ngControl: NgControl) {
     this.ngControl.valueAccessor = this;
   }
 

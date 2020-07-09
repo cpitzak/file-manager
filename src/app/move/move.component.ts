@@ -7,6 +7,7 @@ import { MatTabGroup } from '@angular/material/tabs';
 import { TaskManagerService } from '../core/services/task-manager/task-manager.service';
 import { MoveTabService } from '../core/services/move-tab/move-tab.service';
 import { MoveTask } from '../core/model/task/move-task';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-move',
@@ -15,12 +16,13 @@ import { MoveTask } from '../core/model/task/move-task';
 })
 export class MoveComponent implements OnInit {
   @ViewChild('matTabsGroup') matTabsGroup: MatTabGroup;
-  constructor(private taskManagerService: TaskManagerService, public moveTabService: MoveTabService) { }
+  constructor(private taskManagerService: TaskManagerService, public moveTabService: MoveTabService,
+    private tanslateService: TranslateService) { }
 
   ngOnInit(): void {
     if (this.moveTabService.tabs.length === 0) {
       const existingTaskNames: string[] = this.taskManagerService.taskManger.getTaskNames();
-      const taskName: string = fromUtils.newName('My New Task', existingTaskNames);
+      const taskName: string = fromUtils.newName(this.tanslateService.instant("MOVE.NEW_TASK_NAME"), existingTaskNames);
       this.moveTabService.tabs.push({
         taskName
       });
@@ -53,8 +55,6 @@ export class MoveComponent implements OnInit {
 
   onSave(moveTask: MoveTask) {
     this.taskManagerService.taskManger.add(moveTask);
-    console.log('===');
-    console.log(this.taskManagerService.taskManger.getTasks());
   }
 
 }

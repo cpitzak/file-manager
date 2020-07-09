@@ -136,16 +136,16 @@ export class TaskFormComponent implements OnInit, OnDestroy {
 
   openSameFolderNameDialog() {
     const data: GenericDialogData = {
-      title: "Warning",
+      title: this.tanslateService.instant('MOVE.TASK_FORM.WARNING'),
       acceptButton: {
         enabled: false,
       },
       rejectButton: {
         enabled: true,
         focus: true,
-        text: "Close",
+        text: this.tanslateService.instant('MOVE.TASK_FORM.CLOSE'),
       },
-      innerHtml: "Your source folder and destination folder cannot be the same. Please try again.",
+      innerHtml: this.tanslateService.instant('MOVE.TASK_FORM.SAME_FOLDER_WARNING_MSG'),
     };
     const dialogRef = this.dialog.open(GenericDialogComponent, {
       data,

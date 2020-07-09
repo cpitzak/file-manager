@@ -20,12 +20,12 @@
         </mat-checkbox>
         <mat-form-field class="file-select">
           <mat-select #fileMatSelect [value]="initialSelection" (selectionChange)="onSelectChange($event)">
-            <mat-option [value]="FileMatch.Matches">matches (case sensitive)</mat-option>
-            <mat-option [value]="FileMatch.MatchesCaseInsensitive">matches (case insensitive)</mat-option>
-            <mat-option [value]="FileMatch.NotMatch">does not match (case sensitive)</mat-option>
-            <mat-option [value]="FileMatch.NotMatchCaseInsensitive">does not match (case insensitive)</mat-option>
-            <mat-option [value]="FileMatch.Contains">contains</mat-option>
-            <mat-option [value]="FileMatch.NotContains">does not contain</mat-option>
+            <mat-option [value]="FileMatch.Matches">{{ 'RULES.SELECT_OPTIONS.MATCH_SENSTIVE' | translate }}</mat-option>
+            <mat-option [value]="FileMatch.MatchesCaseInsensitive">{{ 'RULES.SELECT_OPTIONS.MATCH_INSENSTIVE' | translate }}</mat-option>
+            <mat-option [value]="FileMatch.NotMatch">{{ 'RULES.SELECT_OPTIONS.DOES_NOT_MATCH_SENSTIVE' | translate }}</mat-option>
+            <mat-option [value]="FileMatch.NotMatchCaseInsensitive">{{ 'RULES.SELECT_OPTIONS.DOES_NOT_MATCH_INSENSTIVE' | translate }}</mat-option>
+            <mat-option [value]="FileMatch.Contains">{{ 'RULES.SELECT_OPTIONS.CONTAINS' | translate }}</mat-option>
+            <mat-option [value]="FileMatch.NotContains">{{ 'RULES.SELECT_OPTIONS.DOES_NOT_CONTAIN' | translate }}</mat-option>
           </mat-select>
         </mat-form-field>
         t{{ 'RULES.FILENAME_LABEL_END' | translate }}

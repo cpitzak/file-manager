@@ -59,7 +59,15 @@
         "SAVE_BUTTON": "Save",
         "NEW_BUTTON": "New",
         "SOURCE_FOLDER": "Source Folder",
-        "DESTINATION_FOLDER": "Destination Folder"
-      }
+        "DESTINATION_FOLDER": "Destination Folder",
+        "WARNING": "Warning",
+        "CLOSE": "Close",
+        "SAME_FOLDER_WARNING_MSG": "Your source folder and destination folder cannot be the same. Please try again."
+      },
+      "NEW_TASK_NAME": "My New Task"
+    },
+    "SAVED": {
+      "MOVE": "Move",
+      "DELETE": "Delete"
     }
 }

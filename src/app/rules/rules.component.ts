@@ -28,14 +28,13 @@ export class RulesComponent implements OnInit, AfterViewInit, BaseControlValueAc
   initialSelection: FileMatch;
   v2: string;
 
-  constructor(@Self() public ngControl: NgControl, private cdf: ChangeDetectorRef, private tanslateService: TranslateService) {
+  constructor(@Self() public ngControl: NgControl, private cdf: ChangeDetectorRef) {
     this.ngControl.valueAccessor = this;
   }
 
   ngOnInit(): void {
     const taskRules: TaskRules = this.ngControl.control.value;
     this.initialSelection = taskRules?.fileMatch.regex;
-    // this.tanslateService.get('RULES.CHECK_BOXES.FILENAME').subscribe((text: string) => { this.v2 = text });
   }
 
   ngAfterViewInit(): void {
