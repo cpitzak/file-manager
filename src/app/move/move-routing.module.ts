@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: 'move',
     component: MoveComponent
+  },
+  {
+    path: 'move/:task-id',
+    component: MoveComponent
   }
 ];
 

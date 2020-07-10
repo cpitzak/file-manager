@@ -8,7 +8,9 @@
     <!-- Position Column -->
     <ng-container [matColumnDef]="TableColumnLabels.Name">
       <th mat-header-cell *matHeaderCellDef> {{TableColumnLabels.Name}} </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <td mat-cell *matCellDef="let element">
+        <a [routerLink]="['/move', element.id]">{{element.name}}</a>
+      </td>
     </ng-container>
 
     <ng-container [matColumnDef]="TableColumnLabels.TaskType">

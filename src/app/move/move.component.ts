@@ -11,6 +11,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GenericDialogData } from '../generic-dialog/model/generic-dialog-data';
 import { GenericDialogComponent } from '../generic-dialog/generic-dialog.component';
+import { ActivatedRoute } from '@angular/router';
+import { Task } from 'app/core/model/task/task';
 
 @Component({
   selector: 'app-move',
@@ -20,11 +22,26 @@ import { GenericDialogComponent } from '../generic-dialog/generic-dialog.compone
 export class MoveComponent implements OnInit {
   @ViewChild('matTabsGroup') matTabsGroup: MatTabGroup;
   constructor(public dialog: MatDialog, private taskManagerService: TaskManagerService, public moveTabService: MoveTabService,
-    private tanslateService: TranslateService) { }
+    private tanslateService: TranslateService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log('called');
-    if (this.moveTabService.tabs.length === 0) {
+    const taskId: string = this.route.snapshot.params['task-id'];
+    const task: Task = this.taskManagerService.taskManger.getTaskById(taskId);
+    if (task != null) {
+      const tabIndex: number = this.moveTabService.tabs.findIndex((tab: Tab) => {
+        return tab?.initialTask?.id === task.id;
+      });
+      if (tabIndex < 0) {
+        this.moveTabService.tabs.push({
+          taskName: task.name,
+          editsOn: true,
+          initialTask: task
+        });
+        this.moveTabService.selectedIndex = this.moveTabService.tabs.length - 1;
+      } else {
+        this.moveTabService.selectedIndex = tabIndex;
+      }
+    } else if (this.moveTabService.tabs.length === 0) {
       this.initTabs();
     }
   }
@@ -40,7 +57,7 @@ export class MoveComponent implements OnInit {
     existing.concat(this.taskManagerService.taskManger.getTaskNames());
     const newTaskName: string = fromUtils.newName(taskName, existing);
     const newTab: Tab = {
-      taskName: newTaskName
+      taskName: newTaskName,
     }
     this.moveTabService.tabs.push(newTab);
     this.matTabsGroup.selectedIndex = this.moveTabService.tabs.length - 1;
@@ -86,7 +103,7 @@ export class MoveComponent implements OnInit {
     const existingTaskNames: string[] = this.taskManagerService.taskManger.getTaskNames();
     const taskName: string = fromUtils.newName(this.tanslateService.instant("MOVE.NEW_TASK_NAME"), existingTaskNames);
     this.moveTabService.tabs.push({
-      taskName
+      taskName,
     });
   }
 

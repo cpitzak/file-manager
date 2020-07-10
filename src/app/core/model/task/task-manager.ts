@@ -16,9 +16,22 @@ export class TaskManager {
   getTasks(): Task[] {
     const t: Task[] = [];
     this.tasks.forEach((task: Task) => {
-      t.push(task.newInstance());
+      t.push(task);
     });
     return t;
+  }
+
+  getTaskById(id: string): Task {
+    if (id == null) {
+      return undefined;
+    }
+    for (let i = 0; i < this.tasks.length; i++) {
+      const t: Task = this.tasks[i];
+      if (t.id === id) {
+        return this.tasks[i];
+      }
+    }
+    return undefined;
   }
 
   update(task: Task) {

@@ -1,28 +1,35 @@
-import { Component, OnInit, Self, OnDestroy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
-import { NgControl } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, Self, OnDestroy, ChangeDetectorRef, AfterViewInit, Input } from "@angular/core";
+import { NgControl } from "@angular/forms";
+import { Subscription } from "rxjs";
 
-import { BaseControlValueAccessor } from '../core/model/base-control-value-accessor';
-import { TaskManagerService } from '../core/services/task-manager/task-manager.service';
-import { MoveTabService } from '../core/services/move-tab/move-tab.service';
+import { BaseControlValueAccessor } from "../core/model/base-control-value-accessor";
+import { TaskManagerService } from "../core/services/task-manager/task-manager.service";
+import { MoveTabService } from "../core/services/move-tab/move-tab.service";
 
 @Component({
-  selector: 'app-task-name-input',
-  templateUrl: './task-name-input.component.html',
-  styleUrls: ['./task-name-input.component.css']
+  selector: "app-task-name-input",
+  templateUrl: "./task-name-input.component.html",
+  styleUrls: ["./task-name-input.component.css"],
 })
 export class TaskNameInputComponent implements OnInit, OnDestroy, BaseControlValueAccessor<string> {
+  @Input() editsOn: boolean;
 
   valuesChanges: Subscription;
+  originalText: string;
 
-  constructor(@Self() public ngControl: NgControl, private taskManagerService: TaskManagerService, private moveTabService: MoveTabService) {
+  constructor(
+    @Self() public ngControl: NgControl,
+    private taskManagerService: TaskManagerService,
+    private moveTabService: MoveTabService
+  ) {
     this.ngControl.valueAccessor = this;
-   }
+  }
 
   ngOnInit(): void {
+    this.originalText = this.ngControl.control.value;
     this.valuesChanges = this.ngControl.control.valueChanges.subscribe((text: string) => {
       this.validateInput(text);
-    })
+    });
   }
 
   ngOnDestroy(): void {
@@ -30,6 +37,7 @@ export class TaskNameInputComponent implements OnInit, OnDestroy, BaseControlVal
   }
 
   validateInput(text: string) {
+    text = text.trim();
     let matchCount = 0;
     // check if name already exists in a tab
     for (const tab of this.moveTabService.tabs) {
@@ -41,7 +49,8 @@ export class TaskNameInputComponent implements OnInit, OnDestroy, BaseControlVal
       }
     }
     // check if name already exists in taskManager service
-    if (matchCount >= 2 || this.taskManagerService.taskManger.containsName(text)) {
+    if (matchCount >= 2 || (!this.editsOn && this.taskManagerService.taskManger.containsName(text)) ||
+    (this.editsOn && text !== this.originalText && this.taskManagerService.taskManger.containsName(text))) {
       const errors = this.ngControl.control.errors || {};
       errors.duplicateName = true;
       this.ngControl.control.setErrors(errors);
@@ -68,5 +77,4 @@ export class TaskNameInputComponent implements OnInit, OnDestroy, BaseControlVal
   public setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
-
 }
