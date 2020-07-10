@@ -23,12 +23,9 @@ export class MoveComponent implements OnInit {
     private tanslateService: TranslateService) { }
 
   ngOnInit(): void {
+    console.log('called');
     if (this.moveTabService.tabs.length === 0) {
-      const existingTaskNames: string[] = this.taskManagerService.taskManger.getTaskNames();
-      const taskName: string = fromUtils.newName(this.tanslateService.instant("MOVE.NEW_TASK_NAME"), existingTaskNames);
-      this.moveTabService.tabs.push({
-        taskName
-      });
+      this.initTabs();
     }
   }
 
@@ -80,6 +77,16 @@ export class MoveComponent implements OnInit {
       data,
     });
     dialogRef.afterClosed().subscribe((result) => {
+      this.initTabs();
+    });
+  }
+
+  private initTabs() {
+    this.moveTabService.clear();
+    const existingTaskNames: string[] = this.taskManagerService.taskManger.getTaskNames();
+    const taskName: string = fromUtils.newName(this.tanslateService.instant("MOVE.NEW_TASK_NAME"), existingTaskNames);
+    this.moveTabService.tabs.push({
+      taskName
     });
   }
 
