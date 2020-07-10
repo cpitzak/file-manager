@@ -112,11 +112,19 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
   }
 
   onPutInSubfolder(event: MatCheckbox) {
+    this.updateFolder(event.checked, this.selected);
+  }
+
+  onSelectionChange(event: MatSelectChange) {
+    this.updateFolder(true, event.value);
+  }
+
+  private updateFolder(checked: boolean, folderFormatOption: FolderFormatOption) {
     let folder: Folder = this.ngControl.control.value;
-    folder.putInSubfolder = event.checked;
+    folder.putInSubfolder = checked;
     const date: Date = new Date();
-    if (event.checked) {
-      switch (this.selected) {
+    if (checked) {
+      switch (folderFormatOption) {
         case FolderFormatOption.MonthYear: {
           folder.subfolderFormat = `${date.getMonth() + 1}-${date.getFullYear()}`;
           break;
@@ -133,11 +141,6 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
     } else {
       folder.subfolderFormat = undefined;
     }
-  }
-
-  onSelectionChange(event: MatSelectChange) {
-    let folder: Folder = this.ngControl.control.value;
-    folder.subfolderFormat = event.value;
   }
 
 }
