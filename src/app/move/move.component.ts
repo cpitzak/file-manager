@@ -8,6 +8,9 @@ import { TaskManagerService } from '../core/services/task-manager/task-manager.s
 import { MoveTabService } from '../core/services/move-tab/move-tab.service';
 import { MoveTask } from '../core/model/task/move-task';
 import { TranslateService } from '@ngx-translate/core';
+import { MatDialog } from '@angular/material/dialog';
+import { GenericDialogData } from 'app/generic-dialog/model/generic-dialog-data';
+import { GenericDialogComponent } from 'app/generic-dialog/generic-dialog.component';
 
 @Component({
   selector: 'app-move',
@@ -16,7 +19,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class MoveComponent implements OnInit {
   @ViewChild('matTabsGroup') matTabsGroup: MatTabGroup;
-  constructor(private taskManagerService: TaskManagerService, public moveTabService: MoveTabService,
+  constructor(public dialog: MatDialog, private taskManagerService: TaskManagerService, public moveTabService: MoveTabService,
     private tanslateService: TranslateService) { }
 
   ngOnInit(): void {
@@ -54,7 +57,30 @@ export class MoveComponent implements OnInit {
   }
 
   onSave(moveTask: MoveTask) {
-    this.taskManagerService.taskManger.add(moveTask);
+    const success: boolean = this.taskManagerService.taskManger.add(moveTask);
+    if (success) {
+      this.openSaveCompletedDialog();
+    }
+  }
+
+  openSaveCompletedDialog() {
+    const data: GenericDialogData = {
+      title: this.tanslateService.instant('MOVE.TASK_FORM.SAVE_SUCCESS'),
+      acceptButton: {
+        enabled: false,
+      },
+      rejectButton: {
+        enabled: true,
+        focus: true,
+        text: this.tanslateService.instant('MOVE.TASK_FORM.CLOSE'),
+      },
+      innerHtml: this.tanslateService.instant('MOVE.TASK_FORM.SAVE_COMPLETE'),
+    };
+    const dialogRef = this.dialog.open(GenericDialogComponent, {
+      data,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+    });
   }
 
 }
