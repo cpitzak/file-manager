@@ -11,5 +11,7 @@ export class MoveTask extends Task {
     return new MoveTask(this.name, this.sourceFolder, this.destinationFolder, this.rules, this.runOnStartup);
   }
 
-  run() {}
+  run() {
+    console.log('running move task');
+  }
 }

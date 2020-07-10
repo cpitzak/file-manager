@@ -4,6 +4,7 @@ import { Task } from '../core/model/task/task';
 import { MoveTask } from '../core/model/task/move-task';
 import { DeleteTask } from '../core/model/task/delete-task';
 import { TranslateService } from '@ngx-translate/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 export enum TableColumnLabels {
   Name = 'Task Name',
@@ -31,6 +32,20 @@ export class SavedComponent implements OnInit {
   ngOnInit(): void {
     this.moveLabel = this.tanslateService.instant("SAVED.MOVE");
     this.deleteLabel = this.tanslateService.instant("SAVED.DELETE");
+    this.dataSource = this.taskManagerService.taskManger.getTasks();
+  }
+
+  onRunOnStartupChange(event: MatCheckboxChange, task: Task) {
+    task.runOnStartup = event.checked;
+    this.taskManagerService.taskManger.update(task);
+  }
+
+  onRun(task: Task) {
+    task.run();
+  }
+
+  onRemove(task: Task) {
+    this.taskManagerService.taskManger.remove(task);
     this.dataSource = this.taskManagerService.taskManger.getTasks();
   }
 

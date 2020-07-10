@@ -12,5 +12,6 @@ export class DeleteTask extends Task {
   }
 
 	run() {
+    console.log('running delete task');
   }
 }

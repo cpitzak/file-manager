@@ -21,6 +21,13 @@ export class TaskManager {
     return t;
   }
 
+  update(task: Task) {
+    if (task != null) {
+      const i: number = this.findIndex(task);
+      this.tasks[i] = task;
+    }
+  }
+
   add(task: Task): boolean {
     if (task != null) {
       if (this.findIndex(task) === -1) {

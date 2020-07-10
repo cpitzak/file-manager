@@ -18,12 +18,23 @@
 
     <ng-container [matColumnDef]="TableColumnLabels.RunOnStartup">
       <th mat-header-cell *matHeaderCellDef> {{TableColumnLabels.RunOnStartup}} </th>
-      <td mat-cell *matCellDef="let element"> {{element.runOnStartup}} </td>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [checked]="element.runOnStartup" (change)="onRunOnStartupChange($event, element)"></mat-checkbox>
+      </td>
     </ng-container>
 
     <ng-container [matColumnDef]="TableColumnLabels.Actions">
       <th mat-header-cell *matHeaderCellDef> {{TableColumnLabels.Actions}} </th>
-      <td mat-cell *matCellDef="let element"> </td>
+      <td mat-cell *matCellDef="let element">
+        <div class="actions">
+          <button mat-stroked-button color="accent" (click)="onRun(element)">
+            {{ 'SAVED.RUN_BUTTON' | translate }}
+          </button>
+          <button mat-icon-button (click)="onRemove(element)">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -68,6 +68,7 @@
     },
     "SAVED": {
       "MOVE": "Move",
-      "DELETE": "Delete"
+      "DELETE": "Delete",
+      "RUN_BUTTON": "Run"
     }
 }
