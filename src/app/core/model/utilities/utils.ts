@@ -1,4 +1,5 @@
-const fs = require("fs");
+const fs = require('fs');
+const path = require('path');
 
 export function duplicateName(name: string, existing: string[]): string {
   if (
@@ -71,11 +72,23 @@ export function propertyOf<T>(name: keyof T) {
   return name;
 }
 
-export function getFiles(path: string): string[] {
-  let files: string[] = [];
-  if (fs.existsSync(path)) {
-    const filenames: { name: string }[] = fs.readdirSync(path, { withFileTypes: true });
-    files = filenames.reduce((arr: string[], value: { name: string }) => arr.concat(value.name), []);
+export function getFiles(srcPath: string, recursive: boolean = false): string[] {
+  if (!fs.existsSync(srcPath)) {
+    return [];
   }
-  return files;
+  return getFilesHelper(srcPath, recursive);
+}
+
+function getFilesHelper(dirPath: string, recursive: boolean = false, allFiles: string[] = []): string[] {
+  const files: string[] = fs.readdirSync(dirPath);
+  files.forEach((file: string) => {
+    const filePath: string = path.join(dirPath, file);
+    const isDir: boolean = fs.statSync(filePath).isDirectory();
+    if (recursive && isDir) {
+      allFiles = getFilesHelper(filePath, recursive, allFiles);
+    } else if (!isDir) {
+      allFiles.push(filePath);
+    }
+  });
+  return allFiles;
 }

@@ -100,7 +100,7 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
     }
     if (this.opts.showPutInSubfolder && this.checkbox2.checked) {
       folder.putInSubfolder = true;
-      folder.subfolderFormat = this.selected;
+      folder.subfolderName = this.selected;
     }
     this.ngControl.control.setValue(folder);
     this.opened.emit(name);
@@ -126,20 +126,20 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
     if (checked) {
       switch (folderFormatOption) {
         case FolderFormatOption.MonthYear: {
-          folder.subfolderFormat = `${date.getMonth() + 1}-${date.getFullYear()}`;
+          folder.subfolderName = `${date.getMonth() + 1}-${date.getFullYear()}`;
           break;
         }
         case FolderFormatOption.YearMonth: {
-          folder.subfolderFormat = `${date.getFullYear()}-${date.getMonth() + 1}`;
+          folder.subfolderName = `${date.getFullYear()}-${date.getMonth() + 1}`;
           break;
         }
         case FolderFormatOption.DayMonthYear: {
-          folder.subfolderFormat = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+          folder.subfolderName = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
           break;
         }
       }
     } else {
-      folder.subfolderFormat = undefined;
+      folder.subfolderName = undefined;
     }
   }
 

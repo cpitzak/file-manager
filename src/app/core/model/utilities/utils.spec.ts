@@ -78,9 +78,10 @@ describe('Utils', () => {
     expect(fromUtils.newName('a 2', ['a 2'])).toBe('a 3');
   });
 
-  it('#getFiles should return files', () => {
+  it('#getFiles non recur should return certain amount', () => {
     const dir: string = path.join(currentDir, 'test-data', 'get-files');
     const files: string[] = fromUtils.getFiles(dir);
+    console.log(files);
     expect(files.length).toBe(2);
   });
 
@@ -97,6 +98,14 @@ describe('Utils', () => {
   it('#getFiles nowhere should return empty', () => {
     const files: string[] = fromUtils.getFiles('abrakadabra13212');
     expect(files.length).toBe(0);
+  });
+
+  it('#getFiles recursive should return 3', () => {
+    const dir: string = path.join(currentDir, 'test-data', 'get-files');
+    let f: string[] = [];
+    const files: string[] = fromUtils.getFiles(dir, true);
+    console.log(files);
+    expect(files.length).toBe(3);
   });
 
 });
