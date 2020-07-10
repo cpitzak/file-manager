@@ -17,6 +17,7 @@ export interface OpenFolderOpts {
 
 export enum FolderFormatOption {
   MonthYear = 'month-year',
+  YearMonth = 'year-month',
   DayMonthYear = 'day-month-year'
 }
 
@@ -113,7 +114,25 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
   onPutInSubfolder(event: MatCheckbox) {
     let folder: Folder = this.ngControl.control.value;
     folder.putInSubfolder = event.checked;
-    folder.subfolderFormat = event.checked ? this.selected : undefined;
+    const date: Date = new Date();
+    if (event.checked) {
+      switch (this.selected) {
+        case FolderFormatOption.MonthYear: {
+          folder.subfolderFormat = `${date.getMonth() + 1}-${date.getFullYear()}`;
+          break;
+        }
+        case FolderFormatOption.YearMonth: {
+          folder.subfolderFormat = `${date.getFullYear()}-${date.getMonth() + 1}`;
+          break;
+        }
+        case FolderFormatOption.DayMonthYear: {
+          folder.subfolderFormat = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+          break;
+        }
+      }
+    } else {
+      folder.subfolderFormat = undefined;
+    }
   }
 
   onSelectionChange(event: MatSelectChange) {

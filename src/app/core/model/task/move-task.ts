@@ -20,8 +20,12 @@ export class MoveTask extends Task {
   run() {
     const fileContainer: FileContainer = this.getFileContainer();
     if (this.rules.imageFiles) {
+      let dest: string = this.destinationFolder.name;
+      if (this.destinationFolder.putInSubfolder) {
+        dest = path.join(this.destinationFolder.name, this.destinationFolder.subfolderFormat);
+      }
       fileContainer.imageFiles.forEach((filePath: string) => {
-        move(filePath, this.destinationFolder.name);
+        move(filePath, dest);
       });
     }
   }
