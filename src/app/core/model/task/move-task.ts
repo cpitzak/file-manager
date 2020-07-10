@@ -1,6 +1,7 @@
 import { Task } from "./task";
 import { Folder } from "./folder";
 import { TaskRules } from "./task-rules";
+import * as fileExtensions from '../file-extensions';
 
 export class MoveTask extends Task {
   constructor(name: string, sourceFolder: Folder, destinationFolder: Folder, rules: TaskRules, runOnStartup?: boolean) {
@@ -13,5 +14,6 @@ export class MoveTask extends Task {
 
   run() {
     console.log('running move task');
+    console.log(fileExtensions.image);
   }
 }
