@@ -1,4 +1,7 @@
+const path = require('path');
 import * as fromUtils from './utils';
+
+const currentDir: string = path.join(path.resolve('.'), 'src', 'app', 'core', 'model', 'utilities');
 
 describe('Utils', () => {
 
@@ -73,6 +76,27 @@ describe('Utils', () => {
 
   it('#newName should be unique on second one', () => {
     expect(fromUtils.newName('a 2', ['a 2'])).toBe('a 3');
+  });
+
+  it('#getFiles should return files', () => {
+    const dir: string = path.join(currentDir, 'test-data', 'get-files');
+    const files: string[] = fromUtils.getFiles(dir);
+    expect(files.length).toBe(2);
+  });
+
+  it('#getFiles null should return empty', () => {
+    const files: string[] = fromUtils.getFiles(null);
+    expect(files.length).toBe(0);
+  });
+
+  it('#getFiles empty str should return empty', () => {
+    const files: string[] = fromUtils.getFiles('');
+    expect(files.length).toBe(0);
+  });
+
+  it('#getFiles nowhere should return empty', () => {
+    const files: string[] = fromUtils.getFiles('abrakadabra13212');
+    expect(files.length).toBe(0);
   });
 
 });

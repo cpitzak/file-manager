@@ -42,6 +42,7 @@ describe('MoveComponent', () => {
         MatDialogModule,
         GenericDialogModule,
         BrowserAnimationsModule,
+        GenericDialogModule,
         TranslateModule.forRoot() ],
       declarations: [ MoveComponent, TaskFormComponent ]
     })

@@ -2,8 +2,13 @@ import { Task } from "./task";
 import { Folder } from "./folder";
 import { TaskRules } from "./task-rules";
 import * as fileExtensions from '../file-extensions';
+import * as fromUtils from '../utilities/utils';
+import { move } from '../utilities/move-file';
+import { FileContainer } from './file-container';
+const path = require('path');
 
 export class MoveTask extends Task {
+
   constructor(name: string, sourceFolder: Folder, destinationFolder: Folder, rules: TaskRules, runOnStartup?: boolean) {
     super(name, sourceFolder, destinationFolder, rules, runOnStartup);
   }
@@ -13,7 +18,30 @@ export class MoveTask extends Task {
   }
 
   run() {
-    console.log('running move task');
-    console.log(fileExtensions.image);
+    const fileContainer: FileContainer = this.getFileContainer();
+    if (this.rules.imageFiles) {
+      fileContainer.imageFiles.forEach((filePath: string) => {
+        move(filePath, this.destinationFolder.name);
+      });
+    }
   }
+
+  private getFileContainer(): FileContainer {
+    const files: string[] = fromUtils.getFiles(this.sourceFolder.name);
+    const container: FileContainer = {
+      imageFiles: [],
+      documentFiles: [],
+      audioFiles: [],
+      videoFiles: []
+    };
+    files.forEach((file: string) => {
+      const ext: string = path.extname(file).replace('.', '').toLowerCase();
+      if (fileExtensions.image.includes(ext)) {
+        const imageFilePath: string = path.join(this.sourceFolder.name, file);
+        container.imageFiles.push(imageFilePath);
+      }
+    });
+    return container;
+  }
+
 }

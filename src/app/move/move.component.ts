@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Tab } from '../core/model/tab';
 
@@ -9,8 +9,8 @@ import { MoveTabService } from '../core/services/move-tab/move-tab.service';
 import { MoveTask } from '../core/model/task/move-task';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
-import { GenericDialogData } from 'app/generic-dialog/model/generic-dialog-data';
-import { GenericDialogComponent } from 'app/generic-dialog/generic-dialog.component';
+import { GenericDialogData } from '../generic-dialog/model/generic-dialog-data';
+import { GenericDialogComponent } from '../generic-dialog/generic-dialog.component';
 
 @Component({
   selector: 'app-move',
