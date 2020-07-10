@@ -31,7 +31,7 @@ export class MoveTask extends Task {
   }
 
   private getFileContainer(): FileContainer {
-    const files: string[] = fromUtils.getFiles(this.sourceFolder.name);
+    const files: string[] = fromUtils.getFiles(this.sourceFolder.name, this.sourceFolder.includeSubfolders);
     const container: FileContainer = {
       imageFiles: [],
       documentFiles: [],
@@ -41,8 +41,7 @@ export class MoveTask extends Task {
     files.forEach((file: string) => {
       const ext: string = path.extname(file).replace('.', '').toLowerCase();
       if (fileExtensions.image.includes(ext)) {
-        const imageFilePath: string = path.join(this.sourceFolder.name, file);
-        container.imageFiles.push(imageFilePath);
+        container.imageFiles.push(file);
       }
     });
     return container;
