@@ -5,7 +5,7 @@
       <mat-checkbox class="checkbox" (change)="onCheck($event)">
         {{ 'RUN_RULE.ON_START_CHECKBOX_LABEL' | translate }}
       </mat-checkbox>
-      <button class="btn" mat-stroked-button color="accent" (click)="onRun()">
+      <button class="btn" mat-stroked-button color="accent" (click)="onRun()" [disabled]="runDisabled">
         {{ 'RUN_RULE.RUN_NOW_BUTTON' | translate }}
       </button>
     </mat-card-content>

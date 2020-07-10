@@ -21,7 +21,7 @@
     [formControl]="form.controls[FormName.DestinationFolder]" [opts]="destinationFolderOpts"></app-open-folder>
   <app-rules [formControl]="form.controls[FormName.TaskRules]"></app-rules>
   <div class="spacer"></div>
-  <app-run-rule [formControl]="form.controls[FormName.OnStartup]" class="run-rule"></app-run-rule>
+  <app-run-rule [formControl]="form.controls[FormName.OnStartup]" class="run-rule" (run)="onRun()" [runDisabled]="form.invalid"></app-run-rule>
 </div>
 <!-- {{ form.value | json }} -->
 <!-- {{ form.hasError('required') | json }} -->

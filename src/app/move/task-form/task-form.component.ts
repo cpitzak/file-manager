@@ -118,11 +118,7 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     if (this.form.invalid) {
       return;
     }
-    const sourceFolder: Folder = this.form.value[FormName.SourceFolder];
-    const destinationFolder: Folder = this.form.value[FormName.DestinationFolder];
-    const taskRules: TaskRules = this.form.value[FormName.TaskRules];
-    const runOnStartup: boolean = this.form.value[FormName.OnStartup];
-    const task: MoveTask = new MoveTask(this.taskName, sourceFolder, destinationFolder, taskRules, runOnStartup);
+    const task: MoveTask = this.newTaskInstance();
     this.save.emit(task);
   }
 
@@ -131,6 +127,16 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     const destinationFolder: Folder = this.form.value[FormName.DestinationFolder];
     if (sourceFolder.name.length > 0 && sourceFolder.name === destinationFolder.name) {
       this.openSameFolderNameDialog();
+    }
+  }
+
+  onRun() {
+    if (this.form.invalid) {
+      return;
+    }
+    const task: MoveTask = this.newTaskInstance();
+    if (task != null) {
+      task.run();
     }
   }
 
@@ -158,5 +164,16 @@ export class TaskFormComponent implements OnInit, OnDestroy {
       this.form.controls[FormName.SourceFolder].setValue(sourceFolder);
       this.form.controls[FormName.DestinationFolder].setValue(destinationFolder);
     });
+  }
+
+  private newTaskInstance(): MoveTask {
+    if (this.form.invalid) {
+      return null;
+    }
+    const sourceFolder: Folder = this.form.value[FormName.SourceFolder];
+    const destinationFolder: Folder = this.form.value[FormName.DestinationFolder];
+    const taskRules: TaskRules = this.form.value[FormName.TaskRules];
+    const runOnStartup: boolean = this.form.value[FormName.OnStartup];
+    return new MoveTask(this.taskName, sourceFolder, destinationFolder, taskRules, runOnStartup);
   }
 }

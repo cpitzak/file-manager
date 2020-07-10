@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Self } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Self, Input } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { BaseControlValueAccessor } from "../core/model/base-control-value-accessor";
 import { NgControl } from '@angular/forms';
@@ -9,6 +9,7 @@ import { NgControl } from '@angular/forms';
   styleUrls: ['./run-rule.component.css']
 })
 export class RunRuleComponent implements OnInit, BaseControlValueAccessor<boolean> {
+  @Input() runDisabled: boolean;
   @Output() run = new EventEmitter<void>();
 
   constructor(@Self() public ngControl: NgControl) {
