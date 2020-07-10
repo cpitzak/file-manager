@@ -15,6 +15,10 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ["./rules.component.css"],
 })
 export class RulesComponent implements OnInit, AfterViewInit, BaseControlValueAccessor<TaskRules> {
+  @ViewChild('imgCheckbox') imgCheckbox: MatCheckbox;
+  @ViewChild('documentCheckbox') documentCheckbox: MatCheckbox;
+  @ViewChild('audioCheckbox') audioCheckbox: MatCheckbox;
+  @ViewChild('videoCheckbox') videoCheckbox: MatCheckbox;
   @ViewChild("filenameCheckbox") filenameCheckbox: MatCheckbox;
   @ViewChild("fileMatSelect") fileMatSelect: MatSelect;
   @ViewChild("textInput") textInput: ElementRef;
@@ -33,13 +37,21 @@ export class RulesComponent implements OnInit, AfterViewInit, BaseControlValueAc
   }
 
   ngOnInit(): void {
-    const taskRules: TaskRules = this.ngControl.control.value;
-    this.initialSelection = taskRules?.fileMatch.regex;
   }
 
   ngAfterViewInit(): void {
+    const taskRules: TaskRules = this.ngControl.control.value;
+    // load file name state
+    this.filenameCheckbox.checked = taskRules.fileMatch.checked;
+    this.initialSelection = taskRules.fileMatch.regex;
+    this.textInput.nativeElement.value = taskRules.fileMatch.text || '';
     this.fileMatSelect.disabled = !this.filenameCheckbox.checked;
     this.textInput.nativeElement.disabled = !this.filenameCheckbox.checked;
+    // load checkbox state
+    this.imgCheckbox.checked = taskRules.imageFiles;
+    this.documentCheckbox.checked = taskRules.documentFiles;
+    this.audioCheckbox.checked = taskRules.audioFiles;
+    this.videoCheckbox.checked = taskRules.videoFiles;
     this.cdf.detectChanges();
   }
 

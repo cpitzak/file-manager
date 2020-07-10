@@ -59,4 +59,14 @@ export class SavedComponent implements OnInit {
     return result;
   }
 
+  getRouterLink(task: Task): string[] {
+    let url: string[] = [];
+    if (task instanceof MoveTask) {
+      url = ['/move', task.id];
+    } else if (task instanceof DeleteTask) {
+      url = ['/delete'];
+    }
+    return url;
+  }
+
 }

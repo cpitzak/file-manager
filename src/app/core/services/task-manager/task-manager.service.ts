@@ -20,20 +20,20 @@ export class TaskManagerService {
    private mockData() {
     const taskRules: TaskRules = {
       imageFiles: true,
-      audioFiles: false,
-      videoFiles: false,
-      documentFiles: false,
+      audioFiles: true,
+      videoFiles: true,
+      documentFiles: true,
       fileMatch: {
-        checked: false,
+        checked: true,
         regex: FileMatch.Contains,
-        text: ''
+        text: 'blah'
       }
     };
     const sourceFolder: Folder = {
-      name: 'C:\\'
+      name: 'C:\\Users\\black\\Desktop\\images'
     };
     const destinationFolder: Folder = {
-      name: 'D:\\'
+      name: 'C:\\Users\\black\\Desktop\\moved-images'
     };
     const task: MoveTask = new MoveTask('Organize Desktop', sourceFolder, destinationFolder, taskRules, true);
     const task2: DeleteTask = new DeleteTask('Organize Desktop 2', sourceFolder, taskRules, true);

@@ -9,7 +9,7 @@
     <ng-container [matColumnDef]="TableColumnLabels.Name">
       <th mat-header-cell *matHeaderCellDef> {{TableColumnLabels.Name}} </th>
       <td mat-cell *matCellDef="let element">
-        <a [routerLink]="['/move', element.id]">{{element.name}}</a>
+        <a [routerLink]="getRouterLink(element)">{{element.name}}</a>
       </td>
     </ng-container>
 

@@ -38,6 +38,14 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     this._tab = t;
     if (this.form) {
       this.form.controls[FormName.TaskName].setValue(t.taskName);
+      if (t.editsOn && t.initialTask) {
+        this.form.controls[FormName.SourceFolder].setValue(t.initialTask.sourceFolder);
+        if (t.initialTask.destinationFolder) {
+          this.form.controls[FormName.DestinationFolder].setValue(t.initialTask.destinationFolder);
+        }
+        this.form.controls[FormName.TaskRules].setValue(t.initialTask.rules);
+        this.form.controls[FormName.OnStartup].setValue(t.initialTask.runOnStartup);
+      }
     }
   }
   get tab(): Tab {

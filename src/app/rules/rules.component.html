@@ -2,16 +2,16 @@
   <label>{{ 'RULES.TITLE' | translate }}</label>
   <mat-card class="card class.mat-elevation-z0">
     <mat-card-content class="content">
-      <mat-checkbox (change)="onCheck($event, imageFiles)">
+      <mat-checkbox #imgCheckbox (change)="onCheck($event, imageFiles)">
         {{ 'RULES.CHECK_BOXES.IMAGE_FILES' | translate }}
       </mat-checkbox>
-      <mat-checkbox (change)="onCheck($event, documentFiles)">
+      <mat-checkbox #documentCheckbox (change)="onCheck($event, documentFiles)">
         {{ 'RULES.CHECK_BOXES.DOCUMENT_FILES' | translate }}
       </mat-checkbox>
-      <mat-checkbox (change)="onCheck($event, audioFiles)">
+      <mat-checkbox #audioCheckbox (change)="onCheck($event, audioFiles)">
         {{ 'RULES.CHECK_BOXES.AUDIO_FILES' | translate }}
       </mat-checkbox>
-      <mat-checkbox (change)="onCheck($event, videoFiles)">
+      <mat-checkbox #videoCheckbox (change)="onCheck($event, videoFiles)">
         {{ 'RULES.CHECK_BOXES.VIDEO_FILES' | translate }}
       </mat-checkbox>
       <div class="row">
@@ -21,17 +21,21 @@
         <mat-form-field class="file-select">
           <mat-select #fileMatSelect [value]="initialSelection" (selectionChange)="onSelectChange($event)">
             <mat-option [value]="FileMatch.Matches">{{ 'RULES.SELECT_OPTIONS.MATCH_SENSTIVE' | translate }}</mat-option>
-            <mat-option [value]="FileMatch.MatchesCaseInsensitive">{{ 'RULES.SELECT_OPTIONS.MATCH_INSENSTIVE' | translate }}</mat-option>
-            <mat-option [value]="FileMatch.NotMatch">{{ 'RULES.SELECT_OPTIONS.DOES_NOT_MATCH_SENSTIVE' | translate }}</mat-option>
-            <mat-option [value]="FileMatch.NotMatchCaseInsensitive">{{ 'RULES.SELECT_OPTIONS.DOES_NOT_MATCH_INSENSTIVE' | translate }}</mat-option>
+            <mat-option [value]="FileMatch.MatchesCaseInsensitive">
+              {{ 'RULES.SELECT_OPTIONS.MATCH_INSENSTIVE' | translate }}</mat-option>
+            <mat-option [value]="FileMatch.NotMatch">{{ 'RULES.SELECT_OPTIONS.DOES_NOT_MATCH_SENSTIVE' | translate }}
+            </mat-option>
+            <mat-option [value]="FileMatch.NotMatchCaseInsensitive">
+              {{ 'RULES.SELECT_OPTIONS.DOES_NOT_MATCH_INSENSTIVE' | translate }}</mat-option>
             <mat-option [value]="FileMatch.Contains">{{ 'RULES.SELECT_OPTIONS.CONTAINS' | translate }}</mat-option>
-            <mat-option [value]="FileMatch.NotContains">{{ 'RULES.SELECT_OPTIONS.DOES_NOT_CONTAIN' | translate }}</mat-option>
+            <mat-option [value]="FileMatch.NotContains">{{ 'RULES.SELECT_OPTIONS.DOES_NOT_CONTAIN' | translate }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
         t{{ 'RULES.FILENAME_LABEL_END' | translate }}
         <mat-form-field class="text-input">
           <input #textInput matInput placeholder="{{ 'RULES.INPUT.PLACE_HOLDER' | translate }}"
-          value="" (keyup)="onTextChange(textInput.value)" required>
+            (keyup)="onTextChange(textInput.value)" required>
           <mat-hint *ngIf="ngControl.hasError('noText')" align="end" [ngStyle]="{color: 'red'}">
             {{ 'RULES.INPUT.NO_TEXT_ERROR' | translate }}
           </mat-hint>
