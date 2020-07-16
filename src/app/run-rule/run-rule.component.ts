@@ -1,22 +1,29 @@
-import { Component, OnInit, Output, EventEmitter, Self, Input } from '@angular/core';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import { Component, OnInit, Output, EventEmitter, Self, Input, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { MatCheckboxChange, MatCheckbox } from '@angular/material/checkbox';
 import { BaseControlValueAccessor } from "../core/model/base-control-value-accessor";
 import { NgControl } from '@angular/forms';
+import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-run-rule',
   templateUrl: './run-rule.component.html',
   styleUrls: ['./run-rule.component.css']
 })
-export class RunRuleComponent implements OnInit, BaseControlValueAccessor<boolean> {
+export class RunRuleComponent implements OnInit, AfterViewInit, BaseControlValueAccessor<boolean> {
+  @ViewChild('runCheckbox') runCheckbox: MatCheckbox;
   @Input() runDisabled: boolean;
   @Output() run = new EventEmitter<void>();
 
-  constructor(@Self() public ngControl: NgControl) {
+  constructor(@Self() public ngControl: NgControl, private cdr: ChangeDetectorRef) {
     this.ngControl.valueAccessor = this;
   }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit() {
+    this.runCheckbox.checked = this.ngControl.control.value;
+    this.cdr.detectChanges();
   }
 
   public disabled: boolean;
