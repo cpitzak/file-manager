@@ -20,12 +20,12 @@
   <div class="break"></div>
 
   <!-- include subfolder option -->
-  <mat-checkbox #checkbox *ngIf="opts.showIncludeSubfolder" class="subfolders" [class.is-invalid]="ngControl.invalid"
+  <mat-checkbox #includeSubFoldersCheckbox *ngIf="opts.showIncludeSubfolder" class="subfolders" [class.is-invalid]="ngControl.invalid"
    (change)="onIncludeSubfolders($event)">{{ 'OPEN_FOLDER.INCLUDE_SUBFOLDER_CHECKBOX' | translate }}</mat-checkbox>
 
    <!-- put in subfolder option -->
    <ng-container *ngIf="opts.showPutInSubfolder">
-    <mat-checkbox #checkbox2 class="subfolders" [class.is-invalid]="ngControl.invalid"
+    <mat-checkbox #putInSubfolderCheckbox class="subfolders" [class.is-invalid]="ngControl.invalid"
     (change)="onPutInSubfolder($event)">{{ 'OPEN_FOLDER.SUBFOLDER_FORMAT_LABEL' | translate }}</mat-checkbox>
     <mat-form-field style="margin-left: 15px;">
      <mat-select [(value)]="selected" [disabled]="!ngControl.control.value.putInSubfolder" (selectionChange)="onSelectionChange($event)">

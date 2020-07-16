@@ -27,8 +27,8 @@ export enum FolderFormatOption {
   styleUrls: ["./open-folder.component.css"],
 })
 export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, AfterViewInit, OnDestroy  {
-  @ViewChild("checkbox") checkbox: MatCheckbox;
-  @ViewChild("checkbox2") checkbox2: MatCheckbox;
+  @ViewChild("includeSubFoldersCheckbox") includeSubFoldersCheckbox: MatCheckbox;
+  @ViewChild("putInSubfolderCheckbox") putInSubfolderCheckbox: MatCheckbox;
   @ViewChild("input") input: ElementRef;
 
   @Output("opened") opened = new EventEmitter<string>();
@@ -47,11 +47,17 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
   }
 
   ngAfterViewInit(): void {
+    const folder: Folder = this.ngControl.control.value;
+    if (this.opts.showIncludeSubfolder) {
+      this.includeSubFoldersCheckbox.checked = folder.includeSubfolders;
+    }
+    if (this.opts.showPutInSubfolder) {
+      this.putInSubfolderCheckbox.checked = folder.putInSubfolder;
+    }
     this.valueChanges = this.ngControl.valueChanges.subscribe(v => {
       const folder: Folder = this.ngControl.control.value;
       this.input.nativeElement.value = folder?.name;
     });
-    const folder: Folder = this.ngControl.control.value;
     this.input.nativeElement.value = folder?.name;
     // to avoid error: ExpressionChangedAfterItHasBeenCheckedError
     this.cdf.detectChanges();
@@ -96,9 +102,9 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
       name,
     };
     if (this.opts.showIncludeSubfolder) {
-      folder.includeSubfolders = this.checkbox.checked;
+      folder.includeSubfolders = this.includeSubFoldersCheckbox.checked;
     }
-    if (this.opts.showPutInSubfolder && this.checkbox2.checked) {
+    if (this.opts.showPutInSubfolder && this.putInSubfolderCheckbox.checked) {
       folder.putInSubfolder = true;
       folder.subfolderName = this.selected;
     }

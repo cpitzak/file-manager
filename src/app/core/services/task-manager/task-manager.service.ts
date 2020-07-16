@@ -30,10 +30,12 @@ export class TaskManagerService {
       }
     };
     const sourceFolder: Folder = {
-      name: 'C:\\Users\\black\\Desktop\\images'
+      name: 'C:\\Users\\black\\Desktop\\images',
+      includeSubfolders: true
     };
     const destinationFolder: Folder = {
-      name: 'C:\\Users\\black\\Desktop\\moved-images'
+      name: 'C:\\Users\\black\\Desktop\\moved-images',
+      putInSubfolder: true
     };
     const task: MoveTask = new MoveTask('Organize Desktop', sourceFolder, destinationFolder, taskRules, true);
     const task2: DeleteTask = new DeleteTask('Organize Desktop 2', sourceFolder, taskRules, true);
