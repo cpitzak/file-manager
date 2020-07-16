@@ -22,7 +22,8 @@ export class MoveTask extends Task {
     if (this.rules.imageFiles) {
       let dest: string = this.destinationFolder.name;
       if (this.destinationFolder.putInSubfolder) {
-        dest = path.join(this.destinationFolder.name, this.destinationFolder.subfolderName);
+        const destSubfolder: string = fromUtils.getFolderFormat(this.destinationFolder.subfolderFormat);
+        dest = path.join(this.destinationFolder.name, destSubfolder);
       }
       fileContainer.imageFiles.forEach((filePath: string) => {
         move(filePath, dest);

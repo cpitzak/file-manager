@@ -1,3 +1,5 @@
+import { FolderFormat } from "../task/folder-format.enum";
+
 const fs = require('fs');
 const path = require('path');
 
@@ -91,4 +93,22 @@ function getFilesHelper(dirPath: string, recursive: boolean = false, allFiles: s
     }
   });
   return allFiles;
+}
+
+export function getFolderFormat(folderFormat: FolderFormat) {
+  const date: Date = new Date();
+  switch (folderFormat) {
+    case FolderFormat.MonthYear: {
+      return `${date.getMonth() + 1}-${date.getFullYear()}`;
+    }
+    case FolderFormat.YearMonth: {
+      return `${date.getFullYear()}-${date.getMonth() + 1}`;
+    }
+    case FolderFormat.DayMonthYear: {
+      return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+    }
+    default: {
+      return `${date.getMonth() + 1}-${date.getFullYear()}`;
+    }
+  }
 }

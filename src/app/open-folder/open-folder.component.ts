@@ -5,6 +5,7 @@ import { Folder } from "../core/model/task/folder";
 import { MatCheckbox } from "@angular/material/checkbox";
 import { MatSelectChange } from "@angular/material/select";
 import { Subscription } from "rxjs";
+import { FolderFormat } from "app/core/model/task/folder-format.enum";
 const { shell } = require("electron"); // deconstructing assignment
 const remote = require("electron").remote;
 const app = remote.app;
@@ -13,12 +14,6 @@ export interface OpenFolderOpts {
   openFolderPlaceholder: string;
   showIncludeSubfolder?: boolean;
   showPutInSubfolder?: boolean;
-}
-
-export enum FolderFormatOption {
-  MonthYear = 'month-year',
-  YearMonth = 'year-month',
-  DayMonthYear = 'day-month-year'
 }
 
 @Component({
@@ -39,8 +34,8 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
   };
 
   valueChanges: Subscription;
-  FolderFormatOption = FolderFormatOption;
-  selected = FolderFormatOption.MonthYear;
+  FolderFormat = FolderFormat;
+  selected = FolderFormat.MonthYear;
 
   constructor(@Self() public ngControl: NgControl, private cdf: ChangeDetectorRef) {
     this.ngControl.valueAccessor = this;
@@ -53,6 +48,10 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
     }
     if (this.opts.showPutInSubfolder) {
       this.putInSubfolderCheckbox.checked = folder.putInSubfolder;
+      if (folder.putInSubfolder) {
+        this.selected = folder.subfolderFormat;
+        this.updateFolder(true, folder.subfolderFormat);
+      }
     }
     this.valueChanges = this.ngControl.valueChanges.subscribe(v => {
       const folder: Folder = this.ngControl.control.value;
@@ -106,7 +105,7 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
     }
     if (this.opts.showPutInSubfolder && this.putInSubfolderCheckbox.checked) {
       folder.putInSubfolder = true;
-      folder.subfolderName = this.selected;
+      folder.subfolderFormat = this.selected;
     }
     this.ngControl.control.setValue(folder);
     this.opened.emit(name);
@@ -125,28 +124,10 @@ export class OpenFolderComponent implements BaseControlValueAccessor<Folder>, Af
     this.updateFolder(true, event.value);
   }
 
-  private updateFolder(checked: boolean, folderFormatOption: FolderFormatOption) {
+  private updateFolder(checked: boolean, subfolderFormat: FolderFormat) {
     let folder: Folder = this.ngControl.control.value;
+    folder.subfolderFormat = checked ? subfolderFormat : undefined;
     folder.putInSubfolder = checked;
-    const date: Date = new Date();
-    if (checked) {
-      switch (folderFormatOption) {
-        case FolderFormatOption.MonthYear: {
-          folder.subfolderName = `${date.getMonth() + 1}-${date.getFullYear()}`;
-          break;
-        }
-        case FolderFormatOption.YearMonth: {
-          folder.subfolderName = `${date.getFullYear()}-${date.getMonth() + 1}`;
-          break;
-        }
-        case FolderFormatOption.DayMonthYear: {
-          folder.subfolderName = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
-          break;
-        }
-      }
-    } else {
-      folder.subfolderName = undefined;
-    }
   }
 
 }

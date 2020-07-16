@@ -5,6 +5,7 @@ import { TaskRules } from '../../model/task/task-rules';
 import { FileMatch } from '../../model/task/file-match.enum';
 import { Folder } from '../../model/task/folder';
 import { DeleteTask } from '../../model/task/delete-task';
+import { FolderFormat } from 'app/core/model/task/folder-format.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,8 @@ export class TaskManagerService {
     };
     const destinationFolder: Folder = {
       name: 'C:\\Users\\black\\Desktop\\moved-images',
-      putInSubfolder: true
+      putInSubfolder: true,
+      subfolderFormat: FolderFormat.DayMonthYear
     };
     const task: MoveTask = new MoveTask('Organize Desktop', sourceFolder, destinationFolder, taskRules, true);
     const task2: DeleteTask = new DeleteTask('Organize Desktop 2', sourceFolder, taskRules, true);
