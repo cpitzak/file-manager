@@ -1,4 +1,5 @@
 import { FolderFormat } from "../task/folder-format.enum";
+import { FileMatch } from "../task/file-match.enum";
 
 const fs = require('fs');
 const path = require('path');
@@ -95,8 +96,12 @@ function getFilesHelper(dirPath: string, recursive: boolean = false, allFiles: s
   return allFiles;
 }
 
-export function getFolderFormat(folderFormat: FolderFormat) {
+export function getFolderFormat(folderFormat: FolderFormat): string {
   const date: Date = new Date();
+  const defaultFormat: string = `${date.getMonth() + 1}-${date.getFullYear()}`;
+  if (folderFormat == null) {
+    return defaultFormat;
+  }
   switch (folderFormat) {
     case FolderFormat.MonthYear: {
       return `${date.getMonth() + 1}-${date.getFullYear()}`;
@@ -105,10 +110,39 @@ export function getFolderFormat(folderFormat: FolderFormat) {
       return `${date.getFullYear()}-${date.getMonth() + 1}`;
     }
     case FolderFormat.DayMonthYear: {
-      return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+      return defaultFormat;
     }
     default: {
-      return `${date.getMonth() + 1}-${date.getFullYear()}`;
+      return defaultFormat;
+    }
+  }
+}
+
+export function matches(text: string, matcherTest: string, fileMatch: FileMatch): boolean {
+  if (text == null || matcherTest == null || fileMatch == null) {
+    return false;
+  }
+  switch(fileMatch) {
+    case FileMatch.Matches: {
+      return text === matcherTest;
+    }
+    case FileMatch.MatchesCaseInsensitive: {
+      return text.toLowerCase() === matcherTest.toLowerCase();
+    }
+    case FileMatch.NotMatch: {
+      return text !== matcherTest;
+    }
+    case FileMatch.NotMatchCaseInsensitive: {
+      return text.toLowerCase() !== matcherTest.toLowerCase();
+    }
+    case FileMatch.Contains: {
+      return text.includes(matcherTest);
+    }
+    case FileMatch.NotContains: {
+      return !text.includes(matcherTest);
+    }
+    default: {
+      return false;
     }
   }
 }

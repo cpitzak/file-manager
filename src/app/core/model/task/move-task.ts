@@ -26,9 +26,22 @@ export class MoveTask extends Task {
         dest = path.join(this.destinationFolder.name, destSubfolder);
       }
       fileContainer.imageFiles.forEach((filePath: string) => {
-        move(filePath, dest);
+        if (this.rules.fileMatch.checked) {
+          if (this.isMatch(filePath)) {
+            move(filePath, dest);
+          }
+        } else {
+          move(filePath, dest);
+        }
       });
     }
+  }
+
+  private isMatch(filePath: string): boolean {
+    const filenameWithExt: string = path.basename(filePath);
+    const extIndex: number = filenameWithExt.indexOf('.');
+    const filename: string = filenameWithExt.substring(0, extIndex);
+    return fromUtils.matches(filename, this.rules.fileMatch.text, this.rules.fileMatch.regex);
   }
 
   private getFileContainer(): FileContainer {
